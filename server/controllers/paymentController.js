@@ -73,9 +73,15 @@ exports.webhookResponse = catchAsync(async (req, res, next) => {
     const purpose = metaData.purpose;
 
     const user = await User.findById(userId);
+    // Get sub date and expiry date
+    const currentDate = new Date();
+    const expiryDate = currentDate.setDate(currentDate.getDate() + 30);
+    const subDate = Date.now();
 
     if (purpose === 'membership') {
       user.membership = true;
+      user.subDate = subDate;
+      user.subExpiryDate = expiryDate;
     }
 
     if (purpose === 'topup') {

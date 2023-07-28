@@ -1,36 +1,40 @@
-import { Fragment, useState } from "react";
-import useInput from "../../hooks/userInput";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { Helmet } from "react-helmet-async";
+import { Fragment, useEffect, useState, useRef } from 'react';
+import useInput from '../../hooks/userInput';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet-async';
+import axios from 'axios';
 
+import { FcGlobe, FcAddressBook } from 'react-icons/fc';
 import {
   BsFillPersonFill,
   BsFillEnvelopeAtFill,
   BsFillKeyFill,
   BsEyeFill,
   BsEyeSlashFill,
-} from "react-icons/bs";
+} from 'react-icons/bs';
 
-import classes from "./Create.module.css";
-import Spinner from "../UI/Spinner";
-import { authActions } from "../../store/auth-slice";
-import { createAccount } from "../../api/api";
-import AuthAlert from "../alerts/AuthAlert";
+import classes from './Create.module.css';
+import Spinner from '../UI/Spinner';
+import { authActions } from '../../store/auth-slice';
+import { createAccount } from '../../api/api';
+import AuthAlert from '../alerts/AuthAlert';
 
 const Create = () => {
+  const referrerRef = useRef();
+  const [countries, setCountries] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMsg, setAlertMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState('');
   const [alertStatus, setAlertStatus] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordType, setPasswordType] = useState("password");
-  const [confirmPasswordType, setconfirmPasswordType] = useState("password");
+  const [passwordType, setPasswordType] = useState('password');
+  const [confirmPasswordType, setconfirmPasswordType] = useState('password');
   const [showSpinner, setShowSpinner] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const setCookie = useCookies(["jwt"])[1];
+  const setCookie = useCookies(['jwt'])[1];
   const {
     value: firstNameInput,
     enteredValueIsValid: firstNameInputIsValid,
@@ -38,7 +42,7 @@ const Create = () => {
     valueInputChangedHandler: firstNameInputChangedHandler,
     valueInputBlurHandler: firstNameInputBlurHandler,
     reset: firstNameInputReset,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== '');
 
   const {
     value: lastNameInput,
@@ -47,7 +51,7 @@ const Create = () => {
     valueInputChangedHandler: lastNameInputChangedHandler,
     valueInputBlurHandler: lastNameInputBlurHandler,
     reset: lastNameInputReset,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== '');
 
   const {
     value: emailInput,
@@ -56,7 +60,7 @@ const Create = () => {
     valueInputChangedHandler: emailInputChangedHandler,
     valueInputBlurHandler: emailInputBlurHandler,
     reset: emailInputReset,
-  } = useInput((value) => value.trim().includes("@"));
+  } = useInput((value) => value.trim().includes('@'));
 
   const {
     value: passwordInput,
@@ -65,7 +69,8 @@ const Create = () => {
     valueInputChangedHandler: passwordInputChangedHandler,
     valueInputBlurHandler: passwordInputBlurHandler,
     reset: passwordInputReset,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== '');
+
   const {
     value: confirmPasswordInput,
     enteredValueIsValid: confirmPasswordInputIsValid,
@@ -73,7 +78,26 @@ const Create = () => {
     valueInputChangedHandler: confirmPasswordInputChangedHandler,
     valueInputBlurHandler: confirmPasswordInputBlurHandler,
     reset: confirmPasswordInputReset,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== '');
+
+  const {
+    value: countryInput,
+    enteredValueIsValid: countryInputIsValid,
+    hasError: countryInputIsInvalid,
+    valueInputChangedHandler: countryInputChangedHandler,
+    valueInputBlurHandler: countryInputBlurHandler,
+    reset: countryInputReset,
+  } = useInput((value) => value.trim() !== 'Choose country');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get('https://restcountries.com/v3.1/all');
+      const data = res.data.map((el) => el.name.common);
+      data.sort();
+      setCountries(data);
+    };
+    fetchData();
+  }, []);
 
   let formIsValid = false;
 
@@ -82,7 +106,8 @@ const Create = () => {
     lastNameInputIsValid &&
     emailInputIsValid &&
     passwordInputIsValid &&
-    confirmPasswordInputIsValid
+    confirmPasswordInputIsValid &&
+    countryInputIsValid
   ) {
     formIsValid = true;
   }
@@ -105,43 +130,45 @@ const Create = () => {
 
   const passwordActionSee = () => {
     switchEyeIcon();
-    switchType("text");
+    switchType('text');
   };
 
   const passwordActionSee2 = () => {
     switchEyeIcon2();
-    switchType2("text");
+    switchType2('text');
   };
   const passwordActionBlind = () => {
     switchEyeIcon();
-    switchType("password");
+    switchType('password');
   };
 
   const passwordActionBlind2 = () => {
     switchEyeIcon2();
-    switchType2("password");
+    switchType2('password');
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setShowSpinner(true);
     const data = {
-      name: firstNameInput + " " + lastNameInput,
+      name: firstNameInput + ' ' + lastNameInput,
       email: emailInput,
+      country: countryInput,
       password: passwordInput,
       passwordConfirm: confirmPasswordInput,
+      referrerEmail: referrerRef.current.value,
     };
 
     const res = await createAccount(data);
 
-    if (res.status === "success") {
+    if (res.status === 'success') {
       dispatch(authActions.login({ user: res.data.user }));
-      setCookie("jwt", res.token);
+      setCookie('jwt', res.token);
       setAlertMsg(res.message);
       setAlertStatus(true);
       setShowAlert(true);
       setTimeout(() => {
-        navigate("/", { replace: true });
+        navigate('/', { replace: true });
       }, 2000);
     } else {
       setAlertMsg(res.message);
@@ -154,6 +181,7 @@ const Create = () => {
     lastNameInputReset();
     emailInputReset();
     passwordInputReset();
+    countryInputReset();
     confirmPasswordInputReset();
     setTimeout(() => {
       setShowAlert(false);
@@ -169,6 +197,10 @@ const Create = () => {
     : classes.group;
 
   const emailInputClasses = emailInputIsInvalid
+    ? `${classes.group} ${classes.invalid}`
+    : classes.group;
+
+  const countryInputClasses = countryInputIsInvalid
     ? `${classes.group} ${classes.invalid}`
     : classes.group;
 
@@ -195,7 +227,7 @@ const Create = () => {
         {showSpinner && <Spinner />}
         <div className={firstNameInputClasses}>
           <label>First name</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsFillPersonFill className={classes.icon} />
             <input
               type="text"
@@ -207,7 +239,7 @@ const Create = () => {
         </div>
         <div className={lastNameInputClasses}>
           <label>Last name</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsFillPersonFill className={classes.icon} />
             <input
               type="text"
@@ -217,9 +249,25 @@ const Create = () => {
             />
           </div>
         </div>
+        <div className={countryInputClasses}>
+          <label>Country</label>
+          <div className={classes['input-group']}>
+            <FcGlobe className={classes.icon} />
+            <select
+              value={countryInput}
+              onChange={countryInputChangedHandler}
+              onBlur={countryInputBlurHandler}
+            >
+              <option>Choose country</option>
+              {countries?.map((el) => (
+                <option key={el}>{el}</option>
+              ))}
+            </select>
+          </div>
+        </div>
         <div className={emailInputClasses}>
           <label>Email address</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsFillEnvelopeAtFill className={classes.icon} />
             <input
               type="email"
@@ -231,7 +279,7 @@ const Create = () => {
         </div>
         <div className={passwordInputClasses}>
           <label>Password</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsFillKeyFill className={classes.icon} />
             <input
               type={passwordType}
@@ -243,21 +291,21 @@ const Create = () => {
               <BsEyeFill
                 className={classes.icon}
                 onClick={passwordActionSee}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
               />
             )}
             {showPassword && (
               <BsEyeSlashFill
                 className={classes.icon}
                 onClick={passwordActionBlind}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
               />
             )}
           </div>
         </div>
         <div className={confirmPasswordInputClasses}>
           <label>Confirm password</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsFillKeyFill className={classes.icon} />
             <input
               type={confirmPasswordType}
@@ -269,16 +317,23 @@ const Create = () => {
               <BsEyeFill
                 className={classes.icon}
                 onClick={passwordActionSee2}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
               />
             )}
             {showConfirmPassword && (
               <BsEyeSlashFill
                 className={classes.icon}
                 onClick={passwordActionBlind2}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
               />
             )}
+          </div>
+        </div>
+        <div className={classes.group}>
+          <label>Referrer's email(optional)</label>
+          <div className={classes['input-group']}>
+            <FcAddressBook className={classes.icon} />
+            <input type="email" ref={referrerRef} />
           </div>
         </div>
         <div className={classes.action}>

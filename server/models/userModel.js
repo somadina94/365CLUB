@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Please provide an email address'],
       validate: [validator.isEmail, 'Please provide a valid email'],
     },
-    referralEmail: {
+    country: String,
+    referrerEmail: {
       type: String,
       lowercase: true,
     },

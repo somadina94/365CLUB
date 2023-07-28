@@ -1,0 +1,174 @@
+.dice {
+  max-width: 60rem;
+  margin: auto;
+  padding: 6rem;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.stake {
+  width: 8rem;
+  height: 4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 1rem;
+  border: 5px solid black;
+  border-radius: 8px;
+}
+
+.stake:disabled {
+  border: 5px solid #868e96;
+  background-color: #dee2e6;
+}
+
+.selection {
+  max-width: 60rem;
+  margin: auto;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+}
+
+.selection h2 {
+  margin-bottom: 2rem;
+}
+
+.select {
+  display: flex;
+  max-width: 30rem;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.select label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.select label input {
+  width: 3rem;
+  height: 3rem;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.group label {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.icon {
+  width: 20rem;
+  height: 20rem;
+}
+
+.won {
+  color: green;
+}
+
+.lost {
+  color: red;
+}
+
+.rotate {
+  animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.actions {
+  max-width: 60rem;
+  margin: auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.btn {
+  color: #fff;
+  padding: 2rem 4rem;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  transition: all 500ms;
+}
+
+.play {
+  background-color: green;
+}
+
+.reset {
+  background-color: purple;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: gray;
+}
+
+.balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details {
+  width: 20rem;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.credit-logo {
+  width: 5rem;
+  height: 5rem;
+  color: darkgoldenrod;
+}
+
+.balance span {
+  font-size: 3rem;
+  font-weight: 600;
+  color: darkgoldenrod;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+}
+
+.bonus {
+  display: flex;
+  align-items: center;
+}

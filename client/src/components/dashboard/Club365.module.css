@@ -1,0 +1,52 @@
+.club {
+  max-width: 60rem;
+  margin: auto;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+}
+
+.club h2 {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.icon {
+  width: 4rem;
+  height: 4rem;
+}
+
+.content p {
+  font-size: 1.6rem;
+  font-weight: 600;
+  max-width: 50rem;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action button {
+  padding: 2rem 6rem;
+  font-size: 1.6rem;
+  background-color: blue;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  transition: all 500ms;
+}
+
+.action button:hover {
+  transform: scale(1.1);
+}

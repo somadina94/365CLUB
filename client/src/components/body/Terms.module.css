@@ -1,0 +1,14 @@
+.terms {
+  max-width: 80rem;
+  margin: auto;
+}
+
+.content {
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.content p {
+  font-size: 1.4rem;
+}

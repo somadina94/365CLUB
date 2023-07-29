@@ -28,6 +28,8 @@ import EmailVerify from './components/auth/EmailVerify';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import Privacy from './components/body/Privacy';
+import ContactUs from './components/body/ContactUs';
+import ProtectedRoute from './components/protection/ProtectedRoute';
 
 import { loader as historyLoader } from './components/history/History';
 import { loader as emailLoader } from './components/auth/EmailVerify';
@@ -41,11 +43,23 @@ const router = createBrowserRouter(
       <Route path="terms" element={<Terms />} />
       <Route path="rules" element={<Rules />} />
       <Route path="login" element={<Login />} />
+      <Route path="contact-us" element={<ContactUs />} />
       <Route path="privacy-policy" element={<Privacy />} />
       <Route path="forgotPassword" element={<ForgotPassword />} />
       <Route path="resetPassword/:token" element={<ResetPassword />} />
-      <Route path="verify-email/:token" element={<EmailVerify />} loader={emailLoader} />
-      <Route path="dashboard" element={<Dashboard />}>
+      <Route
+        path="verify-email/:token"
+        element={<EmailVerify />}
+        loader={emailLoader}
+      />
+      <Route
+        path="dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<Details />} />
         <Route path="details" element={<Details />} />
         <Route path="history" element={<History />} loader={historyLoader} />

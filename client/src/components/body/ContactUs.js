@@ -1,22 +1,23 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef, useState } from 'react';
 import {
   BsFillPersonFill,
   BsFillEnvelopeAtFill,
   BsEnvelopeFill,
-} from "react-icons/bs";
-import useInput from "../../hooks/userInput";
-import emailjs from "@emailjs/browser";
-import { useDispatch } from "react-redux";
-import { Helmet } from "react-helmet-async";
+} from 'react-icons/bs';
+import useInput from '../../hooks/userInput';
+import emailjs from '@emailjs/browser';
+import { Helmet } from 'react-helmet-async';
 
-import classes from "./ContactUs.module.css";
-import Spinner from "../UI/Spinner";
-import { alertActions } from "../../store/alert-slice";
+import classes from './ContactUs.module.css';
+import Spinner from '../UI/Spinner';
+import AuthAlert from '../alerts/AuthAlert';
 
 const ContactUs = () => {
-  const dispatch = useDispatch();
   const formRef = useRef();
   const [showSpinner, setShowSpinner] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState('');
+  const [alertStatus, setAlertStatus] = useState(false);
   const {
     value: nameInput,
     enteredValueIsValid: nameInputIsValid,
@@ -24,7 +25,7 @@ const ContactUs = () => {
     valueInputChangedHandler: nameInputChangedHandler,
     valueInputBlurHandler: nameInputBlurHandler,
     reset: nameInputReset,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== '');
 
   const {
     value: emailInput,
@@ -33,7 +34,7 @@ const ContactUs = () => {
     valueInputChangedHandler: emailInputChangedHandler,
     valueInputBlurHandler: emailInputBlurHandler,
     reset: emailInputReset,
-  } = useInput((value) => value.trim().includes("@"));
+  } = useInput((value) => value.trim().includes('@'));
 
   const {
     value: messageInput,
@@ -42,7 +43,7 @@ const ContactUs = () => {
     valueInputChangedHandler: messageInputChangedHandler,
     valueInputBlurHandler: messageInputBlurHandler,
     reset: messageInputReset,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== '');
 
   let formIsValid = false;
 
@@ -56,35 +57,39 @@ const ContactUs = () => {
 
     emailjs
       .sendForm(
-        "service_ua44fo2",
-        "template_woqbj77",
+        'service_ua44fo2',
+        'template_woqbj77',
         formRef.current,
-        "ljDiiwdlHrRgfP4dr"
+        'ljDiiwdlHrRgfP4dr'
       )
       .then(
         (result) => {
-          dispatch(
-            alertActions.setState({
-              message:
-                "Email sent succssfully! We will get back to you as soon as possible.",
-              status: "success",
-            })
+          setAlertMsg(
+            'Email sent succssfully! We will get back to you as soon as possible.'
           );
+          setAlertStatus(true);
+          setShowAlert(true);
           e.target.reset();
-          setShowSpinner(false);
           nameInputReset();
           emailInputReset();
           messageInputReset();
+          setTimeout(() => {
+            setShowAlert(false);
+            setShowSpinner(false);
+          }, 5000);
         },
         (error) => {
-          dispatch(
-            alertActions.setState({
-              message:
-                "There was an error sending your email, please try again later or copy our email and email us direct from your mailbox",
-              status: "error",
-            })
+          setAlertMsg(
+            'There was an error sending your email, please try again later or copy our email and email us direct from your mailbox'
           );
-          setShowSpinner(false);
+          setAlertStatus(false);
+          setShowAlert(true);
+
+          e.target.reset();
+          setTimeout(() => {
+            setShowAlert(false);
+            setShowSpinner(false);
+          }, 5000);
         }
       );
   };
@@ -113,9 +118,10 @@ const ContactUs = () => {
       </Helmet>
       <form className={classes.form} ref={formRef} onSubmit={sendEmailHandler}>
         {showSpinner && <Spinner />}
+        {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
         <div className={nameInputClasses}>
           <label htmlFor="name">Name</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsFillPersonFill className={classes.icon} />
             <input
               type="text"
@@ -129,7 +135,7 @@ const ContactUs = () => {
         </div>
         <div className={emailInputClasses}>
           <label htmlFor="email">Emaill address</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsFillEnvelopeAtFill className={classes.icon} />
             <input
               type="text"
@@ -143,10 +149,10 @@ const ContactUs = () => {
         </div>
         <div className={messageInputClasses}>
           <label htmlFor="message">Message</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsEnvelopeFill
               className={classes.icon}
-              style={{ alignSelf: "flex-start" }}
+              style={{ alignSelf: 'flex-start' }}
             />
             <textarea
               type="text"

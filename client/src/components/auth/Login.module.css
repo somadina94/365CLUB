@@ -57,7 +57,7 @@
 .form a {
   text-decoration: none;
   font-size: 2rem;
-  color: #fff;
+  color: blue;
   position: absolute;
   bottom: -4rem;
   padding: 0.4rem 0.8rem;
@@ -65,7 +65,7 @@
 }
 
 .form a:hover {
-  color: blue;
+  color: darkblue;
 }
 
 .action button {

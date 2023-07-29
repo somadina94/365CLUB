@@ -1,11 +1,27 @@
-import { FcContacts, FcAddressBook, FcApproval, FcAcceptDatabase, FcApprove, FcConferenceCall } from 'react-icons/fc';
-
+import { useState } from 'react';
+import {
+  FcContacts,
+  FcAddressBook,
+  FcApproval,
+  FcAcceptDatabase,
+  FcApprove,
+  FcConferenceCall,
+} from 'react-icons/fc';
 import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
 import classes from './Details.module.css';
 import { Link } from 'react-router-dom';
+import Spinner from '../UI/Spinner';
+import { resendEmailVerify } from '../../api/api';
+import AuthAlert from '../alerts/AuthAlert';
 
 const Details = () => {
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState('');
+  const [alertStatus, setAlertStatus] = useState(false);
+  const { jwt } = useCookies(['jwt'])[0];
   const user = useSelector((state) => state.auth.user);
   const emailStatus = user.emailVerified ? 'Verified' : 'Unverified';
   const statusClasses = user.emailVerified ? classes.verified : classes.unverified;
@@ -29,8 +45,30 @@ const Details = () => {
   const membershipClasses = user.membership ? classes.verified : classes.unverified;
   const accountStatus = user.active ? 'Active' : 'Blocked';
 
+  const resendEmailVerifyHandler = async () => {
+    setShowSpinner(true);
+
+    const res = await resendEmailVerify(jwt);
+
+    if (res.status === 'success') {
+      setAlertMsg(res.message);
+      setAlertStatus(true);
+      setShowAlert(true);
+    } else {
+      setAlertMsg(res.message);
+      setAlertStatus(false);
+      setShowAlert(true);
+    }
+    setShowSpinner(false);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 6000);
+  };
+
   return (
     <div className={classes.details}>
+      {showSpinner && <Spinner />}
+      {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <div className={classes.content}>
         <div className={classes.title}>
           <FcContacts className={classes.icon} />
@@ -59,7 +97,7 @@ const Details = () => {
         </div>
         <span className={statusClasses}>{emailStatus}</span>
         {!user.emailVerified && (
-          <button className={classes.btn} type="button">
+          <button className={classes.btn} type="button" onClick={resendEmailVerifyHandler}>
             Resend verification email
           </button>
         )}

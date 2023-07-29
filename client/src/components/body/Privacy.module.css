@@ -1,0 +1,21 @@
+.privacy {
+  max-width: 80rem;
+  margin: auto;
+}
+
+.title {
+  margin-bottom: 2rem;
+  text-align: center;
+  padding: 2rem;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.content p {
+  font-size: 1.4rem;
+}

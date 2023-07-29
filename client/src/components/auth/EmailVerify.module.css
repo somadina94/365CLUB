@@ -1,0 +1,11 @@
+.verified {
+  background-color: #212529;
+  color: #fff;
+  max-width: 80rem;
+  margin: auto;
+  padding: 2rem;
+  font-size: 2rem;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border-radius: 8px;
+}

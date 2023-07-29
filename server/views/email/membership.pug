@@ -1,0 +1,15 @@
+extends baseEmail 
+
+block content 
+    p Hi #{firstname},
+        p Someone has just subscribed to 365CLUB.
+        p You have to check the admin dashboard to see who it is 😀.
+        table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+                tr
+                    td(align='left')
+                        table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                            tbody
+                                tr
+                                    td
+                                        //- a(href=`${url}`, target='_blank') Upload user photo

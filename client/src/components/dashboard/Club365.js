@@ -1,6 +1,7 @@
 import { FcOk } from 'react-icons/fc';
 import { useCookies } from 'react-cookie';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import classes from './Club365.module.css';
 import { membershipCheckout } from '../../api/api';
@@ -13,9 +14,10 @@ const Club365 = () => {
   const [alertStatus, setAlertStatus] = useState(false);
   const { jwt } = useCookies(['jwt'])[0];
   const [showSpinner, setShowSpinner] = useState(false);
+  const is365Member = useSelector((state) => state.auth.user?.membership);
+
   const checkoutHandler = async () => {
     setShowSpinner(true);
-
     const res = await membershipCheckout(jwt);
 
     if (res.status === 'success') {
@@ -60,9 +62,16 @@ const Club365 = () => {
       </div>
       <h2>$10 monthly</h2>
       <div className={classes.action}>
-        <button type="button" onClick={checkoutHandler}>
-          Join
-        </button>
+        {!is365Member && (
+          <button type="button" onClick={checkoutHandler}>
+            Join
+          </button>
+        )}
+        {is365Member && (
+          <button type="button" disabled={is365Member}>
+            Joined
+          </button>
+        )}
       </div>
     </div>
   );

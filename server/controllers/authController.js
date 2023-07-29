@@ -49,18 +49,73 @@ exports.signUp = catchAsync(async (req, res, next) => {
     country: req.body.country,
   });
 
-  // const adminEmail = {
-  //   email: process.env.ADMIN_EMAIL,
-  //   name: 'Admin 365dice',
-  // };
+  // Send email verify token to user.
+  const emailVerifyToken = newUser.createEmailVerifyToken();
+  console.log(emailVerifyToken);
+  await newUser.save({ validateBeforeSave: false });
+  const url = `https://www.365gainfuldice.com/${emailVerifyToken}`;
+  await new Email(newUser, url).sendEmailVerify();
 
-  // await new Email(newUser).sendWelcome();
+  const adminEmail = {
+    email: process.env.ADMIN_EMAIL,
+    name: 'Admin 365dice',
+  };
 
-  // await new Email(adminEmail).sendNewMember();
+  await new Email(adminEmail).sendNewMember();
 
-  const message = 'Signed up successfully.';
+  const message =
+    'Signed up successfully. Check your inbox or spam folder to verify your email.';
 
   createSendToken(newUser, 201, req, res, message);
+});
+
+exports.resendEmailVerify = catchAsync(async (req, res, next) => {
+  // Get loggedin user
+  const user = await User.findById(req.user._id);
+
+  // Create email verify token on user
+  const emailVerifyToken = user.createEmailVerifyToken();
+  await user.save({ validateBeforeSave: false });
+
+  // Send user the token created
+  const url = `https://www.365gainfuldice.com/${emailVerifyToken}`;
+  try {
+    await new Email(user, url).sendEmailVerify();
+  } catch (err) {
+    res.status(500).json({
+      status: 'fail',
+      message: `There was an error sending your verification email, try again or contact customer support`,
+    });
+  }
+  res.status(200).json({
+    status: 'success',
+    message: `Verification email sent successfully, Check your spam box if not in your inbox`,
+  });
+});
+
+exports.verifyEmail = catchAsync(async (req, res, next) => {
+  const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+  const user = await User.findOne({ emailverifyToken: hashedToken });
+
+  if (!user) {
+    return next(new AppError('Your email verify token is invalid', 403));
+  }
+
+  if (user && user.emailVerified === true) {
+    return next(new AppError('You have already verified your email', 403));
+  }
+
+  if (user) {
+    user.emailVerified = true;
+    await user.save({ validateBeforeSave: false });
+    await new Email(user).sendWelcome();
+  }
+
+  res.status(200).json({
+    status: 'success',
+    message: `Email address verified successfully`,
+  });
 });
 
 exports.loginUser = catchAsync(async (req, res, next) => {

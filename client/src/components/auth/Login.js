@@ -1,32 +1,27 @@
-import { useState, Fragment } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import useInput from "../../hooks/userInput";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-import {
-  BsFillEnvelopeAtFill,
-  BsKeyFill,
-  BsEyeFill,
-  BsEyeSlashFill,
-} from "react-icons/bs";
-import { Helmet } from "react-helmet-async";
+import { useState, Fragment } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import useInput from '../../hooks/userInput';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import { BsFillEnvelopeAtFill, BsKeyFill, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
+import { Helmet } from 'react-helmet-async';
 
-import classes from "./Login.module.css";
-import { logIn } from "../../api/api";
-import { authActions } from "../../store/auth-slice";
-import AuthAlert from "../alerts/AuthAlert";
-import Spinner from "../UI/Spinner";
+import classes from './Login.module.css';
+import { logIn } from '../../api/api';
+import { authActions } from '../../store/auth-slice';
+import AuthAlert from '../alerts/AuthAlert';
+import Spinner from '../UI/Spinner';
 
 const Login = () => {
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMsg, setAlertMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState('');
   const [alertStatus, setAlertStatus] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [passwordType, setPasswordType] = useState("password");
+  const [passwordType, setPasswordType] = useState('password');
   const [showSpinner, setShowSpinner] = useState(false);
   const dispatch = useDispatch();
-  const setCookie = useCookies(["jwt"])[1];
+  const setCookie = useCookies(['jwt'])[1];
   const navigate = useNavigate();
 
   const {
@@ -36,7 +31,7 @@ const Login = () => {
     valueInputChangedHandler: emailInputChangedHandler,
     valueInputBlurHandler: emailInputBlurHandler,
     reset: emailInputReset,
-  } = useInput((value) => value.trim().includes("@"));
+  } = useInput((value) => value.trim().includes('@'));
 
   const {
     value: passwordInput,
@@ -45,7 +40,7 @@ const Login = () => {
     valueInputChangedHandler: passwordInputChangedHandler,
     valueInputBlurHandler: passwordInputBlurHandler,
     reset: passwordInputReset,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== '');
 
   const switchEyeIcon = () => {
     setShowPassword((initialstate) => !initialstate);
@@ -57,11 +52,11 @@ const Login = () => {
 
   const passwordActionSee = () => {
     switchEyeIcon();
-    switchType("text");
+    switchType('text');
   };
   const passwordActioBlind = () => {
     switchEyeIcon();
-    switchType("password");
+    switchType('password');
   };
 
   let formIsValid = false;
@@ -81,14 +76,14 @@ const Login = () => {
 
     const res = await logIn(loginData);
 
-    if (res.status === "success") {
+    if (res.status === 'success') {
       dispatch(authActions.login({ user: res.data.user }));
-      setCookie("jwt", res.token);
+      setCookie('jwt', res.token);
       setAlertMsg(res.message);
       setAlertStatus(true);
       setShowAlert(true);
       setTimeout(() => {
-        navigate("/", { replace: true });
+        navigate('/', { replace: true });
       }, 3000);
     } else {
       setAlertMsg(res.message);
@@ -121,12 +116,12 @@ const Login = () => {
         />
         <link rel="canonical" href="/Login" />
       </Helmet>
-      {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <form className={classes.form} onSubmit={submitHandler}>
+        {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
         {showSpinner && <Spinner />}
         <div className={emailInputClasses}>
           <label htmlFor="email">Email address</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsFillEnvelopeAtFill className={classes.icon} />
             <input
               type="email"
@@ -138,7 +133,7 @@ const Login = () => {
         </div>
         <div className={passwordInputClasses}>
           <label htmlFor="password">Password</label>
-          <div className={classes["input-group"]}>
+          <div className={classes['input-group']}>
             <BsKeyFill className={classes.icon} />
             <input
               type={passwordType}
@@ -150,14 +145,14 @@ const Login = () => {
               <BsEyeFill
                 className={classes.icon}
                 onClick={passwordActionSee}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
               />
             )}
             {showPassword && (
               <BsEyeSlashFill
                 className={classes.icon}
                 onClick={passwordActioBlind}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: 'pointer' }}
               />
             )}
           </div>

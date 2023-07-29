@@ -1,0 +1,15 @@
+extends baseEmail 
+
+block content 
+    p Hi #{firstname},
+        p Your membership payment has been receieved and nyour account has been upgraded to 365CLUB.
+        p Welcome to 365CLUB, go ahead and enjoy the benefits of being a member 😀.
+        table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+                tr
+                    td(align='left')
+                        table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                            tbody
+                                tr
+                                    td
+                                        //- a(href=`${url}`, target='_blank') Upload user photo

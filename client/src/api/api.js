@@ -212,3 +212,30 @@ export const topupCheckout = async (data, jwt) => {
     return err.response.data;
   }
 };
+
+export const verifyEmailAddress = async (token) => {
+  try {
+    const res = await axiosInstance({
+      method: 'POST',
+      url: `users/verify-email/${token}`,
+    });
+    return res.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
+
+export const resendEmailVerify = async (jwt) => {
+  try {
+    const res = await axiosInstance({
+      method: 'POST',
+      url: `users/resend-email-verify-token`,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};

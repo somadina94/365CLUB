@@ -83,6 +83,7 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    emailverifyToken: String,
     idFront: String,
     idBack: String,
     selfie: String,
@@ -130,6 +131,14 @@ userSchema.methods.createPasswordResetToken = function () {
   this.passwordResetTokenExpires = Date.now() + 1000 * 60 * 10;
 
   return resetToken;
+};
+
+userSchema.methods.createEmailVerifyToken = function () {
+  const verifyToken = crypto.randomBytes(32).toString('hex');
+
+  this.emailverifyToken = crypto.createHash('sha256').update(verifyToken).digest('hex');
+
+  return verifyToken;
 };
 
 userSchema.methods.changedPasswordAfterJWT = function (JWTTimestamp) {

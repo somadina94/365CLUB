@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const AppError = require('../util/appError');
 const catchAsync = require('../util/catchAsync');
 const coinbase = require('coinbase-commerce-node');
+const Email = require('../util/email');
 
 const Client = coinbase.Client;
 const clientObj = Client.init(process.env.COINBASE_API_KEY);
@@ -78,14 +79,23 @@ exports.webhookResponse = catchAsync(async (req, res, next) => {
     const expiryDate = currentDate.setDate(currentDate.getDate() + 30);
     const subDate = Date.now();
 
+    const adminEmail = {
+      email: process.env.ADMIN_EMAIL,
+      name: 'Admin 365dice',
+    };
+
     if (purpose === 'membership') {
       user.membership = true;
       user.subDate = subDate;
       user.subExpiryDate = expiryDate;
+      await new Email(user).sendUser365SubAlert();
+      await new Email(adminEmail).sendAdmin365MembershipAlert();
     }
 
     if (purpose === 'topup') {
       user.balance += price;
+      await new Email(user).sendUserTopupAlert();
+      await new Email(adminEmail).sendAdminTopupAlert();
     }
     await user.save({ validateBeforeSave: false });
   }

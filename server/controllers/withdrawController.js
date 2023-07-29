@@ -4,6 +4,7 @@ const AppError = require('../util/appError');
 const catchAsync = require('../util/catchAsync');
 const ethAddress = require('ethereum-address');
 const btcAddress = require('bitcoin-address-validation');
+const Email = require('../util/email');
 
 exports.createWithdraw = catchAsync(async (req, res, next) => {
   // Check if wallet addresses are valid
@@ -81,12 +82,18 @@ exports.createWithdraw = catchAsync(async (req, res, next) => {
   if (!withdrawal) {
     return next(
       new AppError(
-        'Something went wrong with placing your withdrawal order, please make sure you followed the process instruction and try again'
+        'Something went wrong with placing your withdrawal request, please make sure you followed the process instruction and try again'
       )
     );
   }
 
   await user.save({ validateBeforeSave: false });
+  const adminEmail = {
+    email: process.env.ADMIN_EMAIL,
+    name: 'Admin 365dice',
+  };
+
+  await new Email(adminEmail).sendAdminWithdrawAlert();
 
   // Send response
   res.status(201).json({

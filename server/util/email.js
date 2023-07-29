@@ -1,13 +1,13 @@
-const nodemailer = require("nodemailer");
-const pug = require("pug");
-const { htmlToText } = require("html-to-text");
+const nodemailer = require('nodemailer');
+const pug = require('pug');
+const { htmlToText } = require('html-to-text');
 
 module.exports = class Email {
   constructor(user, url) {
-    this.firstName = user.name.split(" ")[0];
+    this.firstname = user.name.split(' ')[0];
     this.url = url;
     this.to = user.email;
-    this.from = `Social Warlock <${process.env.EMAIL_FROM}>`;
+    this.from = `365gainfuldice <${process.env.EMAIL_FROM}>`;
   }
 
   newTransport() {
@@ -24,7 +24,7 @@ module.exports = class Email {
   async send(template, subject) {
     // 1) Render HTML based on a pug template
     const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
-      firstName: this.firstName,
+      firstname: this.firstname,
       url: this.url,
       subject,
     });
@@ -43,21 +43,41 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    await this.send("welcome", "Welcome to Social Warlock");
+    await this.send('welcome', 'Welcome to 365gainfuldice');
   }
 
   async sendPasswordReset() {
     await this.send(
-      "passwordReset",
-      "Your password reset token (valid for only 10 minutes)"
+      'passwordReset',
+      'Your password reset token (valid for only 10 minutes)'
     );
   }
 
   async sendNewMember() {
-    await this.send("newMember", "New member alert");
+    await this.send('newMember', 'New member alert');
   }
 
-  async sendNewOrder() {
-    await this.send("newOrder", "New order alert");
+  async sendEmailVerify() {
+    await this.send('emailVerify', 'Verify your email address');
+  }
+
+  async sendAdmin365MembershipAlert() {
+    await this.send('membership', 'New player upgraded to 365CLUB');
+  }
+
+  async sendAdminWithdrawAlert() {
+    await this.send('withdrawal', 'Withdraw request alert');
+  }
+
+  async sendUser365SubAlert() {
+    await this.send('membershipAlert', 'Your 365CLUB membership subscription');
+  }
+
+  async sendUserTopupAlert() {
+    await this.send('topupAlert', 'Successful despoit');
+  }
+
+  async sendAdminTopupAlert() {
+    await this.send('topup', 'Top up alert');
   }
 };

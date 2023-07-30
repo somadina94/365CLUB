@@ -68,7 +68,7 @@ exports.webhookResponse = catchAsync(async (req, res, next) => {
   );
 
   if (event.type === 'charge:confirmed') {
-    const metaData = JSON.parse(event.data.metadata);
+    const metaData = event.data.metadata;
     const userId = metaData.user;
     const price = metaData.price;
     const purpose = metaData.purpose;

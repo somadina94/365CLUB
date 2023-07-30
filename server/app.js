@@ -13,7 +13,6 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
-const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -34,18 +33,13 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-app.use(express.json());
-
 app.use(
   express.json({
     verify: (req, res, buf) => {
-      req.rawBody = buf;
+      req.rawBody = buf.toString();
     },
   })
 );
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   '/webhook',

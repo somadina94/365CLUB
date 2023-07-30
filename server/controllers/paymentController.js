@@ -72,6 +72,7 @@ exports.webhookResponse = catchAsync(async (req, res, next) => {
     const userId = metaData.user;
     const price = metaData.price;
     const purpose = metaData.purpose;
+    res.sendStatus(200);
 
     const user = await User.findById(userId);
     // Get sub date and expiry date
@@ -99,5 +100,4 @@ exports.webhookResponse = catchAsync(async (req, res, next) => {
     }
     await user.save({ validateBeforeSave: false });
   }
-  res.sendStatus(200);
 });

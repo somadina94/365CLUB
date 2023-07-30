@@ -15,8 +15,8 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const fetch = async () => {
       const res = await getMe(jwt);
-      dispatch(authActions.refreshUser({ user: res.data.user }));
       if (res.status === 'success') {
+        dispatch(authActions.refreshUser({ user: res.data.user }));
         setAuth('authenticated');
       } else {
         dispatch(authActions.logout());

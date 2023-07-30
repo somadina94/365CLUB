@@ -26,3 +26,28 @@
   background-color: #868e96;
   color: #fff;
 }
+
+@media (max-width: 62.5em) {
+  .nav a {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 42.5em) {
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 31.25em) {
+  .nav {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .nav a {
+    padding: 1rem 0;
+  }
+}

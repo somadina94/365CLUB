@@ -41,6 +41,8 @@ router.post(
   userController.uploadVerificationPhotos
 );
 
+router.patch('/verify-identity/:id', userController.approveIdData);
+
 router.patch('/block/:id', authController.restrictTo('admin'), userController.blockUser);
 router.patch(
   '/unblock/:id',

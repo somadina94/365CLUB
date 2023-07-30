@@ -29,8 +29,8 @@ exports.createWithdraw = catchAsync(async (req, res, next) => {
 
   // Get amount and check is its less than min allowed.
   const amount = req.body.amount * 1;
-  if (amount < 5) {
-    return next(new AppError('Minimium withdrawal limit is $5', 401));
+  if (amount < 50) {
+    return next(new AppError('Minimium withdrawal limit is $50', 403));
   }
 
   // Get user

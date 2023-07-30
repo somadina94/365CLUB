@@ -84,4 +84,8 @@ module.exports = class Email {
   async sendPaidAlert() {
     await this.send('paidAlert', 'Successful withdraw');
   }
+
+  async sendIdVerifiedAlert() {
+    await this.send('idVerifiedAlert', 'Identity Verification');
+  }
 };

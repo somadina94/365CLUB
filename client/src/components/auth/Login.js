@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import useInput from '../../hooks/userInput';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { BsFillEnvelopeAtFill, BsKeyFill, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
+import {
+  BsFillEnvelopeAtFill,
+  BsKeyFill,
+  BsEyeFill,
+  BsEyeSlashFill,
+} from 'react-icons/bs';
 import { Helmet } from 'react-helmet-async';
 
 import classes from './Login.module.css';
@@ -112,7 +117,7 @@ const Login = () => {
         <title>Login</title>
         <meta
           name="description"
-          content="Login to your account now and be able to make your social media account purchases in minutes."
+          content="Login to your account to play and win big."
         />
         <link rel="canonical" href="/Login" />
       </Helmet>

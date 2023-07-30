@@ -176,3 +176,46 @@
   display: flex;
   align-items: center;
 }
+
+@media (max-width: 62.5em) {
+  .balance span {
+    font-size: 1.6rem;
+  }
+  .credit-logo {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .details h2 {
+    font-size: 1.4rem;
+  }
+
+  .details {
+    width: 14rem;
+  }
+}
+
+@media (max-width: 55.75em) {
+  .balance {
+    top: 8rem;
+  }
+}
+
+@media (max-width: 31.25em) {
+  .selection h2 {
+    font-size: 1.4rem;
+  }
+
+  .select label {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  .actions {
+    padding: 0.8rem;
+  }
+
+  .btn {
+    padding: 1.2rem 2rem;
+  }
+}

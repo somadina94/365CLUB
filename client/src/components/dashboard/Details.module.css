@@ -64,3 +64,15 @@
   padding: 1rem 2rem;
   border-radius: 8px;
 }
+
+@media (max-width: 31.25em) {
+  .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .content span {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+}

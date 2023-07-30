@@ -22,3 +22,29 @@
   background-color: #868e96;
   color: #fff;
 }
+
+@media (max-width: 62.5em) {
+  .nav a {
+    font-size: 1.4rem;
+    padding: 2.96rem 2rem;
+  }
+}
+
+@media (max-width: 39.4em) {
+  .nav {
+    flex-direction: column;
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    right: 0;
+    background-color: #f1f3f5;
+    padding: 2rem 0;
+  }
+
+  .nav a {
+    font-size: 1.4rem;
+    padding: 1rem 3rem;
+    width: 100%;
+    text-align: center;
+  }
+}

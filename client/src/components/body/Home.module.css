@@ -46,3 +46,29 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 62.5em) {
+  .home h1 {
+    font-size: 2rem;
+  }
+
+  .dice {
+    max-width: 12rem;
+    max-height: 12rem;
+  }
+}
+
+@media (max-width: 37.5em) {
+  .home {
+    max-width: 100%;
+  }
+
+  .home h1 {
+    font-size: 1.4rem;
+  }
+
+  .dice {
+    max-width: 6rem;
+    max-height: 6rem;
+  }
+}

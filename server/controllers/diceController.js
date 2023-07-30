@@ -15,10 +15,13 @@ exports.playDice = catchAsync(async (req, res, next) => {
       )
     );
   }
+
   // 2) Check if player has enough balance to play.
   const stake = req.body.stake * 1;
   if (user.balance < stake) {
-    return next(new AppError('Insufficient balance, add funds to your account to play', 401));
+    return next(
+      new AppError('Insufficient balance, add funds to your account to play', 401)
+    );
   }
 
   // 3) Check is stake is less than min
@@ -52,7 +55,7 @@ exports.playDice = catchAsync(async (req, res, next) => {
 
   // 6) Credit player if won
   if (result === 3 || result === 6 || result === 5) {
-    const newBalance = user.balance + stake + stake * 0.9;
+    const newBalance = user.balance + stake * 0.9;
     user.balance = newBalance;
     await user.save({ validateBeforeSave: false });
   }
@@ -97,7 +100,10 @@ exports.playWithBonus = catchAsync(async (req, res, next) => {
   // Check if email is verified
   if (!user.emailVerified) {
     return next(
-      new AppError('Please verify your email to play, check your inbox or spam folder', 401)
+      new AppError(
+        'Please verify your email to play, check your inbox or spam folder',
+        401
+      )
     );
   }
   // Get stake
@@ -105,7 +111,10 @@ exports.playWithBonus = catchAsync(async (req, res, next) => {
   // Check if stake is lower than user's bonus minimium
   if (stake < user.bonusMin) {
     return next(
-      new AppError(`Your current minimium stake from bonus balance is ${user.bonusMin}`, 401)
+      new AppError(
+        `Your current minimium stake from bonus balance is ${user.bonusMin}`,
+        401
+      )
     );
   }
   // Check is stake is higher than bonus balance

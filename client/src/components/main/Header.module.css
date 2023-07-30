@@ -8,6 +8,7 @@
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
   margin-bottom: 6rem;
   position: sticky;
+  position: relative;
   top: 0;
   z-index: 200;
 }
@@ -24,4 +25,37 @@
 .logo:hover {
   background-color: #343a40;
   color: #fff;
+}
+
+.nav-container {
+  transition: all 1s;
+}
+
+.menu-icon {
+  margin-right: 1rem;
+  width: 4rem;
+  height: 4rem;
+  display: none;
+}
+
+.toggle-nav {
+  opacity: 1;
+}
+
+@media (max-width: 43.75em) {
+  .logo {
+    font-size: 1.6rem;
+    padding: 2.8rem 1rem;
+  }
+}
+
+@media (max-width: 39.5em) {
+  .menu-icon {
+    display: block;
+  }
+
+  .toggle-nav {
+    opacity: 0;
+    pointer-events: none;
+  }
 }

@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
-import { FaDiceD6 } from "react-icons/fa6";
-import { useCookies } from "react-cookie";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useRef, useEffect } from 'react';
+import { FaDiceD6 } from 'react-icons/fa6';
+import { useCookies } from 'react-cookie';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   BsDice1,
   BsDice2,
@@ -9,27 +9,27 @@ import {
   BsDice4,
   BsDice5,
   BsDice6,
-} from "react-icons/bs";
-import { AiOutlineDollar } from "react-icons/ai";
+} from 'react-icons/bs';
+import { AiOutlineDollar } from 'react-icons/ai';
+import { Helmet } from 'react-helmet-async';
 
-import classes from "./Dice.module.css";
-import { playDice } from "../../api/api";
-import { playDiceWithBonus } from "../../api/api";
-import AuthAlert from "../alerts/AuthAlert";
-import { authActions } from "../../store/auth-slice";
-import { getMe } from "../../api/api";
+import classes from './Dice.module.css';
+import { playDice } from '../../api/api';
+import { playDiceWithBonus } from '../../api/api';
+import AuthAlert from '../alerts/AuthAlert';
+import { authActions } from '../../store/auth-slice';
+import { getMe } from '../../api/api';
 
 const Dice = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertMsg, setAlertMsg] = useState("");
+  const [alertMsg, setAlertMsg] = useState('');
   const [alertStatus, setAlertStatus] = useState(false);
   const [rollDice, setRollDice] = useState(false);
   const [result, setResult] = useState(0);
-  const { jwt } = useCookies(["jwt"])[0];
+  const { jwt } = useCookies(['jwt'])[0];
   const playBtnRef = useRef();
   const stakeRef = useRef();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const mainBalance = useSelector((state) => state.auth.user?.balance);
   const bonusBalance = useSelector((state) => state.auth.user?.bonusBalance);
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Dice = () => {
   useEffect(() => {
     const request = async () => {
       const res = await getMe(jwt);
-      if (res.status === "success") {
+      if (res.status === 'success') {
         dispatch(authActions.refreshUser({ user: res.data.user }));
       }
     };
@@ -56,52 +56,44 @@ const Dice = () => {
   const rollHandler = async () => {
     setRollDice(true);
     playBtnRef.current.disabled = true;
-    const request = selectedOption === "main" ? playDice : playDiceWithBonus;
+    const request = selectedOption === 'main' ? playDice : playDiceWithBonus;
     const stake = stakeRef.current.value;
-    if (isLoggedIn) {
-      const res = await request({ stake }, jwt);
 
-      if (res.status === "success") {
-        setUpdateUser(true);
-        setResult(res.data.newDice.score);
-        setRollDice(false);
-        setAlertMsg(res.message);
-        if (res.data.newDice.status) {
-          setAlertStatus(true);
-        } else {
-          setAlertStatus(false);
-        }
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-          setUpdateUser(false);
-        }, 4000);
+    const res = await request({ stake }, jwt);
+
+    if (res.status === 'success') {
+      setUpdateUser(true);
+      setResult(res.data.newDice.score);
+      setRollDice(false);
+      setAlertMsg(res.message);
+      if (res.data.newDice.status) {
+        setAlertStatus(true);
       } else {
-        setResult(0);
-        setRollDice(false);
-        setAlertMsg(res.message);
         setAlertStatus(false);
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 4000);
       }
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        setUpdateUser(false);
+      }, 4000);
     } else {
-      setAlertMsg("Unauthorized!!! please login to play");
+      setResult(0);
+      setRollDice(false);
+      setAlertMsg(res.message);
       setAlertStatus(false);
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
-        setRollDice(false);
       }, 4000);
     }
+
     playBtnRef.current.disabled = false;
   };
 
   const resetHandler = () => {
     setResult(0);
     setSelectedOption(null);
-    stakeRef.current.value = "";
+    stakeRef.current.value = '';
   };
 
   const diceClasses = rollDice
@@ -113,24 +105,28 @@ const Dice = () => {
   return (
     <div className={classes.container}>
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
-      {isLoggedIn && (
-        <div className={classes.balance}>
-          <div className={classes.details}>
-            <h2>Bonus Balance</h2>
-            <div className={classes.bonus}>
-              <AiOutlineDollar className={classes["credit-logo"]} />
-              <span>{bonusBalance.toFixed(2)}</span>
-            </div>
-          </div>
-          <div className={classes.details}>
-            <h2>Main Balance</h2>
-            <div className={classes.main}>
-              <AiOutlineDollar className={classes["credit-logo"]} />
-              <span>{mainBalance.toFixed(2)}</span>
-            </div>
+      <Helmet>
+        <title>Play</title>
+        <meta name="description" content="Time to win big" />
+        <link rel="canonical" href="/plsy" />
+      </Helmet>
+      <div className={classes.balance}>
+        <div className={classes.details}>
+          <h2>Bonus Balance</h2>
+          <div className={classes.bonus}>
+            <AiOutlineDollar className={classes['credit-logo']} />
+            <span>{bonusBalance.toFixed(2)}</span>
           </div>
         </div>
-      )}
+        <div className={classes.details}>
+          <h2>Main Balance</h2>
+          <div className={classes.main}>
+            <AiOutlineDollar className={classes['credit-logo']} />
+            <span>{mainBalance.toFixed(2)}</span>
+          </div>
+        </div>
+      </div>
+
       <div className={classes.dice}>
         {result === 0 && <FaDiceD6 className={diceClasses} />}
         {result === 1 && (
@@ -159,18 +155,18 @@ const Dice = () => {
             <input
               type="checkbox"
               name="main"
-              checked={selectedOption === "main"}
+              checked={selectedOption === 'main'}
               onChange={handleCheckChanged}
-            />{" "}
+            />{' '}
             Main balance
           </label>
           <label>
             <input
               type="checkbox"
               name="bonus"
-              checked={selectedOption === "bonus"}
+              checked={selectedOption === 'bonus'}
               onChange={handleCheckChanged}
-            />{" "}
+            />{' '}
             Bonus balance
           </label>
         </div>

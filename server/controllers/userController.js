@@ -2,8 +2,8 @@ const User = require('../models/userModel');
 const AppError = require('../util/appError');
 const catchAsync = require('../util/catchAsync');
 const multer = require('multer');
-const multerS3 = require('multer-s3');
 const B2 = require('backblaze-b2');
+const Email = require('../util/email');
 
 exports.upload = multer({ storage: multer.memoryStorage() });
 
@@ -27,9 +27,7 @@ exports.uploadVerificationPhotos = catchAsync(async (req, res, next) => {
       const uploadFileResponse = await b2.uploadFile({
         uploadUrl: uploadUrl.data.uploadUrl,
         uploadAuthToken: uploadUrl.data.authorizationToken,
-        filename: `${file.originalname}-${Date.now().toString()}-${
-          req.user._id
-        }.jpg`,
+        filename: `${file.originalname}-${Date.now().toString()}-${req.user._id}.jpg`,
         mime: file.mimetype, // or 'b2/x-auto' for auto-detect
         data: file.buffer, // multer provides the file data in-memory; no need to fs.readFile
       });
@@ -51,8 +49,7 @@ exports.uploadVerificationPhotos = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    message:
-      'Data uploaded successfully, we will get back to your as soon as possible.',
+    message: 'Data uploaded successfully, we will get back to your as soon as possible.',
   });
 });
 
@@ -164,5 +161,19 @@ exports.getMe = catchAsync(async (req, res, next) => {
     data: {
       user,
     },
+  });
+});
+
+exports.approveIdData = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  user.IdVerified = 'verified';
+  await user.save({ validateBeforeSave: false });
+
+  await new Email(user).sendIdVerifiedAlert();
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Identity verification approved successfully',
   });
 });

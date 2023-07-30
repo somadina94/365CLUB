@@ -1,0 +1,48 @@
+.home {
+  margin: auto;
+  height: 70rem;
+  max-width: 90%;
+  padding: 4rem;
+  background-image: url('../../images/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.home h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-style: italic;
+  margin-bottom: 12rem;
+  color: #fff;
+  padding: 2rem;
+  background-color: #868e96;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dices {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  row-gap: 6rem;
+}
+
+.dice {
+  max-width: 20rem;
+  max-height: 20rem;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

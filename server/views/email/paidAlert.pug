@@ -1,0 +1,15 @@
+extends baseEmail 
+
+block content 
+    p Hi #{firstname},
+        p Your withdrawal request has been approved and funds has been sent to your chosen wallet address.
+        p It may take a little time to reflect depending on the crypto network congestion.
+        table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+                tr
+                    td(align='left')
+                        table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                            tbody
+                                tr
+                                    td
+                                        //- a(href=`${url}`, target='_blank') Upload user photo

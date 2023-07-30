@@ -1,12 +1,12 @@
-import { Fragment } from "react";
-import Header from "./Header";
-import { Outlet } from "react-router-dom";
+import { Fragment } from 'react';
+import Header from './Header';
+import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
     <Fragment>
       <Header />
-      <main>
+      <main className="out-let-dash">
         <Outlet />
       </main>
     </Fragment>

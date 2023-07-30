@@ -127,3 +127,21 @@ exports.getUserWithdrawalRequests = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.approveWithdraw = catchAsync(async (req, res, next) => {
+  const withdraw = await Withdraw.findById(req.params.id);
+
+  const user = await User.findById(withdraw.user);
+
+  await new Email(user).sendPaidAlert();
+  withdraw.status = true;
+  await withdraw.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Withdraw approved successfully',
+    data: {
+      withdraw,
+    },
+  });
+});

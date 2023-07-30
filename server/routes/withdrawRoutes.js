@@ -11,6 +11,8 @@ router
   .post(withdrawController.createWithdraw)
   .get(withdrawController.getAllWithdrawalRequests);
 
+router.patch('/approve', withdrawController.approveWithdraw);
+
 router.get('/player-withdraws', withdrawController.getUserWithdrawalRequests);
 
 module.exports = router;

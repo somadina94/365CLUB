@@ -80,4 +80,8 @@ module.exports = class Email {
   async sendAdminTopupAlert() {
     await this.send('topup', 'Top up alert');
   }
+
+  async sendPaidAlert() {
+    await this.send('paidAlert', 'Successful withdraw');
+  }
 };

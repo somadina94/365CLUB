@@ -13,6 +13,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
+const bodyParser = require('body-parser');
 
 const app = express();
 

@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { BsKeyFill, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './ForgotPassword.module.css';
 import Spinner from '../UI/Spinner';
@@ -127,6 +128,11 @@ const ResetPassword = () => {
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
+      <Helmet>
+        <title>Reset password</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/resetPassword/:token" />
+      </Helmet>
       {showSpinner && <Spinner />}
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <h2>Enter your new password and click proceed.</h2>

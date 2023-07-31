@@ -57,10 +57,10 @@ const ContactUs = () => {
 
     emailjs
       .sendForm(
-        'service_ua44fo2',
-        'template_woqbj77',
+        'service_uib2f0p',
+        'template_yarrcpz',
         formRef.current,
-        'ljDiiwdlHrRgfP4dr'
+        'H7lyDd1Ty1-e6On89'
       )
       .then(
         (result) => {

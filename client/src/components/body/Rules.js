@@ -1,8 +1,18 @@
+import { Helmet } from 'react-helmet-async';
+
 import classes from './Rules.module.css';
 
 const Rules = () => {
   return (
     <section className={classes.rules}>
+      <Helmet>
+        <title>Rules</title>
+        <meta
+          name="description"
+          content="Read to understand how to play this unique game of dice"
+        />
+        <link rel="canonical" href="/rules" />
+      </Helmet>
       <div className={classes.content}>
         <h2>1. Sign up</h2>
         <p>

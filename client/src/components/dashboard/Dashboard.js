@@ -8,7 +8,7 @@ const Dashboard = () => {
     <Fragment>
       <Helmet>
         <title>Dashboard</title>
-        <meta name="description" content="Start playing" />
+        <meta name="description" content="" />
         <link rel="canonical" href="/dashboard" />
       </Helmet>
       <Header />

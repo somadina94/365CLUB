@@ -1,8 +1,18 @@
+import { Helmet } from 'react-helmet-async';
+
 import classes from './Privacy.module.css';
 
 const Privacy = () => {
   return (
     <section className={classes.privacy}>
+      <Helmet>
+        <title>Privcy policy</title>
+        <meta
+          name="description"
+          content="Read to understand how your data is being used and secured"
+        />
+        <link rel="canonical" href="/privacy-policy" />
+      </Helmet>
       <h2 className={classes.title}>Privacy Policy</h2>
       <div className={classes.content}>
         <h2>1. Introduction</h2>

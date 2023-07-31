@@ -1,8 +1,18 @@
-import classes from "./Terms.module.css";
+import { Helmet } from 'react-helmet-async';
+
+import classes from './Terms.module.css';
 
 const Terms = () => {
   return (
     <section className={classes.terms}>
+      <Helmet>
+        <title>Terms and conditions</title>
+        <meta
+          name="description"
+          content="Read to agree or disagree to use our services"
+        />
+        <link rel="canonical" href="/terms" />
+      </Helmet>
       <div className={classes.content}>
         <h2>1. Introduction</h2>
         <p>

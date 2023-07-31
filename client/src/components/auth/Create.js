@@ -218,7 +218,7 @@ const Create = () => {
         <title>Create account</title>
         <meta
           name="description"
-          content="Create an account now and be able to make your social media account purchases in minutes."
+          content="Create an account now and get 50 credits to start playing with."
         />
         <link rel="canonical" href="/create-account" />
       </Helmet>

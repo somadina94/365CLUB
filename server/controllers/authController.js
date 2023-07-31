@@ -51,9 +51,8 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
   // Send email verify token to user.
   const emailVerifyToken = newUser.createEmailVerifyToken();
-  console.log(emailVerifyToken);
   await newUser.save({ validateBeforeSave: false });
-  const url = `https://www.365gainfuldice.com/${emailVerifyToken}`;
+  const url = `https://www.365gainfuldice.com/verify-email/${emailVerifyToken}`;
   await new Email(newUser, url).sendEmailVerify();
 
   const adminEmail = {
@@ -78,7 +77,7 @@ exports.resendEmailVerify = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // Send user the token created
-  const url = `https://www.365gainfuldice.com/${emailVerifyToken}`;
+  const url = `https://www.365gainfuldice.com/verify-email/${emailVerifyToken}`;
   try {
     await new Email(user, url).sendEmailVerify();
   } catch (err) {

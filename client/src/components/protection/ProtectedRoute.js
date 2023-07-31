@@ -19,8 +19,8 @@ const ProtectedRoute = ({ children }) => {
         dispatch(authActions.refreshUser({ user: res.data.user }));
         setAuth('authenticated');
       } else {
-        dispatch(authActions.logout());
         setAuth('unauthenticated');
+        dispatch(authActions.logout());
       }
     };
     fetch();

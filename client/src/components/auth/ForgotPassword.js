@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useInput from '../../hooks/userInput';
 import { BsFillEnvelopeAtFill } from 'react-icons/bs';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './ForgotPassword.module.css';
 import Spinner from '../UI/Spinner';
@@ -56,6 +57,11 @@ const ForgotPassword = () => {
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
+      <Helmet>
+        <title>Forgot password</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/forgotPassowrd" />
+      </Helmet>
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       {showSpinner && <Spinner />}
       <h2>Enter your emaill address and click proceed</h2>

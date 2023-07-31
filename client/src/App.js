@@ -1,6 +1,4 @@
-import { Fragment, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useCookies } from 'react-cookie';
+import { Fragment } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,9 +6,8 @@ import {
   RouterProvider,
   Navigate,
 } from 'react-router-dom';
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 
-import { authActions } from './store/auth-slice';
-import { getMe } from './api/api';
 import Layout from './components/pages/Layout';
 import Dice from './components/body/Dice';
 import Create from './components/auth/Create';
@@ -85,23 +82,13 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const dispatch = useDispatch();
-  const { jwt } = useCookies(['jwt'])[0];
-  useEffect(() => {
-    const request = async () => {
-      if (jwt && jwt.length > 12) {
-        const res = await getMe(jwt);
-        if (res.status === 'success') {
-          dispatch(authActions.refreshUser({ user: res.data.user }));
-          console.log('ran');
-        }
-      }
-    };
-    request();
-  }, [jwt, dispatch]);
   return (
     <Fragment>
       <RouterProvider router={router} />
+      <TawkMessengerReact
+        propertyId="64c79429cc26a871b02c5280"
+        widgetId="1h6lplgsj"
+      />
     </Fragment>
   );
 }

@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { FcCamera } from 'react-icons/fc';
 import { useCookies } from 'react-cookie';
 import { useSelector, useDispatch } from 'react-redux';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './Verify.module.css';
 import selfieSample from '../../images/photo.jpg';
@@ -25,7 +26,9 @@ const Verify = () => {
   const idBackRef = useRef();
   const setReload = useState(false)[1];
   const { jwt } = useCookies(['jwt'])[0];
-  const userIdVerifiedStatus = useSelector((state) => state.auth.user.IdVerified);
+  const userIdVerifiedStatus = useSelector(
+    (state) => state.auth.user.IdVerified
+  );
   const [updateUser, setUpdateUser] = useState(false);
   const dispatch = useDispatch();
 
@@ -95,13 +98,25 @@ const Verify = () => {
     return (
       <div className={classes.processing}>
         <h2>Processing...</h2>
-        <p>It usually takes us 1 to 5 working days to verify Identity data. Please be patient with us </p>
+        <p>
+          It usually takes us 1 to 5 working days to verify Identity data.
+          Please be patient with us{' '}
+        </p>
       </div>
     );
   }
 
   return (
-    <form className={classes.form} onSubmit={submitHandler} onChange={handleChange}>
+    <form
+      className={classes.form}
+      onSubmit={submitHandler}
+      onChange={handleChange}
+    >
+      <Helmet>
+        <title>Verify account</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/dashboard/verify-account" />
+      </Helmet>
       {showSpinner && <Spinner />}
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <h2>Photos on the right are samples of required documents</h2>
@@ -109,7 +124,12 @@ const Verify = () => {
         <label>Clear Selfie</label>
         <div className={classes['input-group']}>
           <FcCamera className={classes.icon} />
-          <input ref={selfieRef} capture="camera" accept="image/*" type="file" />
+          <input
+            ref={selfieRef}
+            capture="camera"
+            accept="image/*"
+            type="file"
+          />
           <div className={classes.sample}>
             <img src={selfieSample} alt="sample" />
           </div>
@@ -119,7 +139,12 @@ const Verify = () => {
         <label>Clear selfie with Id front</label>
         <div className={classes['input-group']}>
           <FcCamera className={classes.icon} />
-          <input ref={selfieWithIdRef} capture="camera" accept="image/*" type="file" />
+          <input
+            ref={selfieWithIdRef}
+            capture="camera"
+            accept="image/*"
+            type="file"
+          />
           <div className={classes.sample}>
             <img src={selfieWithIdSample} alt="sample" />
           </div>
@@ -129,7 +154,12 @@ const Verify = () => {
         <label>Clear photo of Id frontside</label>
         <div className={classes['input-group']}>
           <FcCamera className={classes.icon} />
-          <input ref={idFrontRef} capture="camera" accept="image/*" type="file" />
+          <input
+            ref={idFrontRef}
+            capture="camera"
+            accept="image/*"
+            type="file"
+          />
           <div className={classes.sample}>
             <img src={idFrontSample} alt="sample" />
           </div>
@@ -139,7 +169,12 @@ const Verify = () => {
         <label>Clear photo of Id backside</label>
         <div className={classes['input-group']}>
           <FcCamera className={classes.icon} />
-          <input ref={idBackRef} capture="camera" accept="image/*" type="file" />
+          <input
+            ref={idBackRef}
+            capture="camera"
+            accept="image/*"
+            type="file"
+          />
           <div className={classes.sample}>
             <img src={idBackSample} alt="sample" />
           </div>

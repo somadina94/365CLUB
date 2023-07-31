@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useInput from '../../hooks/userInput';
 import { RiExchangeDollarLine } from 'react-icons/ri';
 import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './AddFunds.module.css';
 import Spinner from '../UI/Spinner';
@@ -56,6 +57,11 @@ const AddFunds = () => {
     : classes.group;
   return (
     <form className={classes.form} onSubmit={submitHandler}>
+      <Helmet>
+        <title>Fund account</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/dashboard/fund-account" />
+      </Helmet>
       {showSpinner && <Spinner />}
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <h2>Minimium deposit is $5 USD</h2>

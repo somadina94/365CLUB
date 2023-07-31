@@ -3,6 +3,7 @@ import useInput from '../../hooks/userInput';
 import { FcDepartment, FcCurrencyExchange, FcHome } from 'react-icons/fc';
 import { MdPaid } from 'react-icons/md';
 import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './Withdrawal.module.css';
 import Spinner from '../UI/Spinner';
@@ -52,7 +53,12 @@ const Withdrawal = () => {
   } = useInput((value) => value.trim() !== '');
 
   let formIsValid = false;
-  if (balanceInputIsValid && walletInputIsValid && addressInputIsValid && amountInputIsValid) {
+  if (
+    balanceInputIsValid &&
+    walletInputIsValid &&
+    addressInputIsValid &&
+    amountInputIsValid
+  ) {
     formIsValid = true;
   }
 
@@ -107,6 +113,11 @@ const Withdrawal = () => {
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
+      <Helmet>
+        <title>Withdrawal</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/dashboard/withdraw" />
+      </Helmet>
       {showSpinner && <Spinner />}
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <div className={balanceInputClasses}>

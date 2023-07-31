@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BsKeyFill, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import useInput from '../../hooks/userInput';
 import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './Password.module.css';
 import { updatePassword } from '../../api/api';
@@ -48,7 +49,11 @@ const Password = () => {
   } = useInput((value) => value.trim() !== '');
 
   let formIsValid = false;
-  if (currentPasswordInputIsValid && passwordInputIsValid && confirmPasswordInputIsValid) {
+  if (
+    currentPasswordInputIsValid &&
+    passwordInputIsValid &&
+    confirmPasswordInputIsValid
+  ) {
     formIsValid = true;
   }
 
@@ -56,7 +61,9 @@ const Password = () => {
     ? `${classes.group} ${classes.invalid}`
     : classes.group;
 
-  const passwordInputClasses = passwordInputIsInvalid ? `${classes.group} ${classes.invalid}` : classes.group;
+  const passwordInputClasses = passwordInputIsInvalid
+    ? `${classes.group} ${classes.invalid}`
+    : classes.group;
 
   const confirmPasswordInputClasses = confirmPasswordInputIsInvalid
     ? `${classes.group} ${classes.invalid}`
@@ -144,6 +151,11 @@ const Password = () => {
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
+      <Helmet>
+        <title>Change password</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/dashboard/updatePassword" />
+      </Helmet>
       {showSpinner && <Spinner />}
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <div className={currentPasswordInputClasses}>
@@ -157,13 +169,23 @@ const Password = () => {
             onBlur={currentPasswordInputBlurHandler}
           />
           {!showPassword && (
-            <BsEyeFill className={classes.icon} onClick={passwordActionSee} style={{ cursor: 'pointer' }} />
+            <BsEyeFill
+              className={classes.icon}
+              onClick={passwordActionSee}
+              style={{ cursor: 'pointer' }}
+            />
           )}
           {showPassword && (
-            <BsEyeSlashFill className={classes.icon} onClick={passwordActioBlind} style={{ cursor: 'pointer' }} />
+            <BsEyeSlashFill
+              className={classes.icon}
+              onClick={passwordActioBlind}
+              style={{ cursor: 'pointer' }}
+            />
           )}
         </div>
-        {currentPasswordInputIsInvalid && <span>This field cannot be empty.</span>}
+        {currentPasswordInputIsInvalid && (
+          <span>This field cannot be empty.</span>
+        )}
       </div>
       <div className={passwordInputClasses}>
         <label>New password</label>
@@ -176,10 +198,18 @@ const Password = () => {
             onBlur={passwordInputBlurHandler}
           />
           {!showPassword2 && (
-            <BsEyeFill className={classes.icon} onClick={passwordActionSee2} style={{ cursor: 'pointer' }} />
+            <BsEyeFill
+              className={classes.icon}
+              onClick={passwordActionSee2}
+              style={{ cursor: 'pointer' }}
+            />
           )}
           {showPassword2 && (
-            <BsEyeSlashFill className={classes.icon} onClick={passwordActioBlind2} style={{ cursor: 'pointer' }} />
+            <BsEyeSlashFill
+              className={classes.icon}
+              onClick={passwordActioBlind2}
+              style={{ cursor: 'pointer' }}
+            />
           )}
         </div>
         {passwordInputIsInvalid && <span>This field cannot be empty.</span>}
@@ -195,13 +225,23 @@ const Password = () => {
             onBlur={confirmPasswordInputBlurHandler}
           />
           {!showPassword3 && (
-            <BsEyeFill className={classes.icon} onClick={passwordActionSee3} style={{ cursor: 'pointer' }} />
+            <BsEyeFill
+              className={classes.icon}
+              onClick={passwordActionSee3}
+              style={{ cursor: 'pointer' }}
+            />
           )}
           {showPassword3 && (
-            <BsEyeSlashFill className={classes.icon} onClick={passwordActioBlind3} style={{ cursor: 'pointer' }} />
+            <BsEyeSlashFill
+              className={classes.icon}
+              onClick={passwordActioBlind3}
+              style={{ cursor: 'pointer' }}
+            />
           )}
         </div>
-        {confirmPasswordInputIsInvalid && <span>This field cannot be empty.</span>}
+        {confirmPasswordInputIsInvalid && (
+          <span>This field cannot be empty.</span>
+        )}
       </div>
       <div className={classes.action}>
         <button type="submit" disabled={!formIsValid}>

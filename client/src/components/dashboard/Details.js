@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fc';
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './Details.module.css';
 import { Link } from 'react-router-dom';
@@ -24,7 +25,9 @@ const Details = () => {
   const { jwt } = useCookies(['jwt'])[0];
   const user = useSelector((state) => state.auth.user);
   const emailStatus = user.emailVerified ? 'Verified' : 'Unverified';
-  const statusClasses = user.emailVerified ? classes.verified : classes.unverified;
+  const statusClasses = user.emailVerified
+    ? classes.verified
+    : classes.unverified;
   const idStatus =
     user.IdVerified === 'unverified'
       ? 'Unverified'
@@ -42,7 +45,9 @@ const Details = () => {
       ? classes.processing
       : '';
   const membershipStatus = user.membership ? '365CLUB' : 'Regular';
-  const membershipClasses = user.membership ? classes.verified : classes.unverified;
+  const membershipClasses = user.membership
+    ? classes.verified
+    : classes.unverified;
   const accountStatus = user.active ? 'Active' : 'Blocked';
 
   const resendEmailVerifyHandler = async () => {
@@ -67,6 +72,11 @@ const Details = () => {
 
   return (
     <div className={classes.details}>
+      <Helmet>
+        <title>Account details</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/dashboard/details" />
+      </Helmet>
       {showSpinner && <Spinner />}
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <div className={classes.content}>
@@ -97,7 +107,11 @@ const Details = () => {
         </div>
         <span className={statusClasses}>{emailStatus}</span>
         {!user.emailVerified && (
-          <button className={classes.btn} type="button" onClick={resendEmailVerifyHandler}>
+          <button
+            className={classes.btn}
+            type="button"
+            onClick={resendEmailVerifyHandler}
+          >
             Resend verification email
           </button>
         )}
@@ -108,7 +122,9 @@ const Details = () => {
           <span>Identity Status</span>
         </div>
         <span className={idStatusClasses}>{idStatus}</span>
-        {user.IdVerified === 'unverified' && <Link to="/dashboard/verify-account">Verify</Link>}
+        {user.IdVerified === 'unverified' && (
+          <Link to="/dashboard/verify-account">Verify</Link>
+        )}
       </div>
       <div className={classes.content}>
         <div className={classes.title}>

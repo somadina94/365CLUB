@@ -11,7 +11,7 @@ const resources = coinbase.resources;
 const webhook = coinbase.Webhook;
 
 exports.createMembershipCheckout = catchAsync(async (req, res, next) => {
-  const monthlyCharge = 1;
+  const monthlyCharge = 10;
   const charge = await resources.Charge.create({
     name: '365Club membership checkout',
     description: 'Membership purchase charge',

@@ -12,6 +12,7 @@
   color: black;
   font-size: 1.6rem;
   font-weight: 600;
+  display: block;
   padding: 2rem 0;
   width: 100%;
   text-align: center;
@@ -45,9 +46,5 @@
 @media (max-width: 31.25em) {
   .nav {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .nav a {
-    padding: 1rem 0;
   }
 }

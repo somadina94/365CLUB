@@ -119,7 +119,7 @@ const Login = () => {
           name="description"
           content="Login to your account to play and win big."
         />
-        <link rel="canonical" href="/Login" />
+        <link rel="canonical" href="/login" />
       </Helmet>
       <form className={classes.form} onSubmit={submitHandler}>
         {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}

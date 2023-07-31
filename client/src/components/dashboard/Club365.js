@@ -2,6 +2,7 @@ import { FcOk } from 'react-icons/fc';
 import { useCookies } from 'react-cookie';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './Club365.module.css';
 import { membershipCheckout } from '../../api/api';
@@ -35,30 +36,40 @@ const Club365 = () => {
   };
   return (
     <div className={classes.club}>
+      <Helmet>
+        <title>365CLUB</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/dashboard/club365" />
+      </Helmet>
       {showSpinner && <Spinner />}
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <h2>365Club membership benefits</h2>
       <div className={classes.content}>
         <FcOk className={classes.icon} />
-        <p>Be able to stake more than 5credits per game from your main balance.</p>
-      </div>
-      <div className={classes.content}>
-        <FcOk className={classes.icon} />
         <p>
-          Become entitled to monthly bonus of 500credits which is equivalent to $500. Bonus credit
-          rules apply.
+          Be able to stake more than 5credits per game from your main balance.
         </p>
       </div>
       <div className={classes.content}>
         <FcOk className={classes.icon} />
         <p>
-          Get free amazon giftcards on your birthdays if you have been a member for the past 90days
-          before your birthday.
+          Become entitled to monthly bonus of 500credits which is equivalent to
+          $500. Bonus credit rules apply.
         </p>
       </div>
       <div className={classes.content}>
         <FcOk className={classes.icon} />
-        <p>Get 50% discount if you wish to advertise your business on our platform.</p>
+        <p>
+          Get free amazon giftcards on your birthdays if you have been a member
+          for the past 90days before your birthday.
+        </p>
+      </div>
+      <div className={classes.content}>
+        <FcOk className={classes.icon} />
+        <p>
+          Get 50% discount if you wish to advertise your business on our
+          platform.
+        </p>
       </div>
       <h2>$10 monthly</h2>
       <div className={classes.action}>

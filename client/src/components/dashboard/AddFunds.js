@@ -71,7 +71,6 @@ const AddFunds = () => {
           <RiExchangeDollarLine className={classes.icon} />
           <input
             type="number"
-            min="4"
             value={amountInput}
             onChange={amountInputChangedHandler}
             onBlur={amountInputBlurHandler}

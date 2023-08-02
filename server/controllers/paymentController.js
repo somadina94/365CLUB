@@ -99,5 +99,7 @@ exports.webhookResponse = catchAsync(async (req, res, next) => {
       await new Email(adminEmail).sendAdminTopupAlert();
     }
     await user.save({ validateBeforeSave: false });
+  } else {
+    res.sendStatus(200);
   }
 });

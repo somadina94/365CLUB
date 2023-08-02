@@ -86,8 +86,8 @@ function App() {
     <Fragment>
       <RouterProvider router={router} />
       <TawkMessengerReact
-        propertyId="64c7b203cc26a871b02c58c3"
-        widgetId="1h6m0uodl"
+        propertyId="643012464247f20fefea5d26"
+        widgetId="1gtdseqgd"
       />
     </Fragment>
   );

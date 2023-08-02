@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
     },
     bonusPlayTarget: {
       type: Number,
-      default: 10,
+      default: 50,
     },
     bonusMin: {
       type: Number,

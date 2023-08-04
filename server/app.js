@@ -13,8 +13,11 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
+// const test = require('./util/test');
 
 const app = express();
+
+// test.diceMan();
 
 const corsOptions = {
   origin: '*',

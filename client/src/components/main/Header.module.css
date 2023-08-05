@@ -1,11 +1,11 @@
 .header {
   margin: auto;
   height: 8rem;
-  background-color: #fff;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
   margin-bottom: 6rem;
   position: relative;
   position: sticky;

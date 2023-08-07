@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const baseURL =
-  process.env.NODE_ENV === 'development'
-    ? process.env.REACT_APP_BASE_URL_DEV
-    : process.env.REACT_APP_BASE_URL_PRO;
+const baseURL = `https://api.365gainfuldice.com/api/v1/`;
+// const baseURL = `https://127.0.0.1:5004/api/v1/`;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,

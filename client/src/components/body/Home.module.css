@@ -27,6 +27,7 @@
   justify-items: center;
   align-items: center;
   row-gap: 6rem;
+  margin-bottom: 12rem;
 }
 
 .dice {
@@ -36,6 +37,30 @@
   height: 100%;
   color: #fff;
   animation: rotate 4s linear infinite;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action a {
+  text-decoration: none;
+  padding: 2rem 4rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: blue;
+  border-radius: 8px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+  border: 3px solid #fff;
+  transition: all 500ms;
+}
+
+.action a:hover {
+  background-color: darkblue;
+  transform: scale(1.1);
 }
 
 @keyframes rotate {

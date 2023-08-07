@@ -161,7 +161,10 @@ const Login = () => {
               />
             )}
           </div>
-          <Link to="/forgotPassword">Forgot password?</Link>
+          <div className={classes.redirect}>
+            <Link to="/forgotPassword">Forgot password?</Link>
+            <Link to="/signUp">Create account</Link>
+          </div>
         </div>
         <div className={classes.action}>
           <button type="submit" disabled={!formIsValid}>

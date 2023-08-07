@@ -1,9 +1,13 @@
 import { BsDice3, BsDice5, BsDice6 } from 'react-icons/bs';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import classes from './Home.module.css';
 
 const Home = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const playPath = isLoggedIn ? '/play' : '/login';
   return (
     <div className={classes.home}>
       <Helmet>
@@ -18,6 +22,9 @@ const Home = () => {
         <BsDice3 className={classes.dice} />
         <BsDice6 className={classes.dice} />
         <BsDice5 className={classes.dice} />
+      </div>
+      <div className={classes.action}>
+        <Link to={playPath}>Start Playing</Link>
       </div>
     </div>
   );

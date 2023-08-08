@@ -18,11 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* background-image: url('./images/background.jpg');
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center; */
+  background-color: #f3f2f0;
 }
 
 code {

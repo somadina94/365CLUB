@@ -6,6 +6,11 @@
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   margin-bottom: 2rem;
+  background-color: #fff;
+}
+
+.details {
+  background-color: #fff;
 }
 
 .stake {
@@ -31,6 +36,7 @@
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .selection h2 {
@@ -79,6 +85,10 @@
 
 .lost {
   color: red;
+}
+
+.actions {
+  background-color: #fff;
 }
 
 .rotate {

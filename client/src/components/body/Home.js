@@ -7,7 +7,7 @@ import classes from './Home.module.css';
 
 const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const playPath = isLoggedIn ? '/play' : '/login';
+  const playPath = isLoggedIn ? '/play' : '/signUp';
   return (
     <div className={classes.home}>
       <Helmet>
@@ -16,7 +16,8 @@ const Home = () => {
         <link rel="canonical" href="/" />
       </Helmet>
       <h1>
-        The odds are in your favor, the more you play, the more you win!!!
+        Create an account now and get $50 free. The odds are in your favor, the
+        more you play, the more you win!!!
       </h1>
       <div className={classes.dices}>
         <BsDice3 className={classes.dice} />

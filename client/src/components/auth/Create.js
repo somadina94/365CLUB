@@ -220,7 +220,7 @@ const Create = () => {
           name="description"
           content="Create an account now and get 50 credits to start playing with."
         />
-        <link rel="canonical" href="/create-account" />
+        <link rel="canonical" href="/signUp" />
       </Helmet>
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <form className={classes.form} onSubmit={submitHandler}>

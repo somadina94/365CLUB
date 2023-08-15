@@ -64,7 +64,7 @@ const ForgotPassword = () => {
       </Helmet>
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       {showSpinner && <Spinner />}
-      <h2>Enter your emaill address and click proceed</h2>
+      <h2>Enter your emaill address below to reset your password</h2>
       <div className={emailInputClasses}>
         <label>Email address</label>
         <div className={classes['input-group']}>

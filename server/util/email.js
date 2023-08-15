@@ -88,4 +88,16 @@ module.exports = class Email {
   async sendIdVerifiedAlert() {
     await this.send('idVerifiedAlert', 'Identity Verification');
   }
+
+  async sendAskReferrerToVerify() {
+    await this.send('askReferrerToVerify', 'Issue with referral bonus');
+  }
+
+  async sendAskReferreeToVerify() {
+    await this.send('askReferreeToVerify', 'Issue with referral bonus');
+  }
+
+  async sendReferralBonusCreditAlert() {
+    await this.send('referralBonusCreditAlert', 'Bonus credit alert');
+  }
 };

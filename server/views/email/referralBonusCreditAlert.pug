@@ -1,0 +1,15 @@
+extends baseEmail 
+
+block content 
+    p Hi #{firstname},
+        p Your Reffered player signed up and verified their account and as promised we have credited your account with $300 credit.
+        p Go have some fun playing with your bonus credit. And remember to get more bonusses, refer more players to sign up and verify their account.
+        table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+                tr
+                    td(align='left')
+                        table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                            tbody
+                                tr
+                                    td
+                                        //- a(href=`${url}`, target='_blank') Upload user photo

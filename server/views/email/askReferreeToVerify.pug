@@ -1,0 +1,15 @@
+extends baseEmail 
+
+block content 
+    p Hi #{firstname},
+        p We wanted to credit your Referrer with their referral bonus now but noticed your account is not verified yet.
+        p Please follow the due process to verify your account to make your referrer eligible to recieve their referral bonus. We will try again in within 24hours.
+        table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+                tr
+                    td(align='left')
+                        table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                            tbody
+                                tr
+                                    td
+                                        //- a(href=`${url}`, target='_blank') Upload user photo

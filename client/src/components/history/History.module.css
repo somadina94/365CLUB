@@ -1,7 +1,7 @@
 .history {
   max-width: 80rem;
   margin: auto;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   list-style: none;
   max-height: 80rem;
   overflow-y: scroll;

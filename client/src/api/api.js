@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const baseURL = `https://api.365gainfuldice.com/api/v1/`;
-// const baseURL = `https://127.0.0.1:5004/api/v1/`;
+// const baseURL = `http://127.0.0.1:5004/api/v1/`;
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -143,6 +143,7 @@ export const getMe = async (jwt) => {
         authorization: `Bearer ${jwt}`,
       },
     });
+    console.log(res);
     return res.data;
   } catch (err) {
     return err.response.data;

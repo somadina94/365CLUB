@@ -6,6 +6,7 @@ const userRouter = require('./routes/userRoutes');
 const diceRouter = require('./routes/diceRoutes');
 const withdrawRouter = require('./routes/withdrawRoutes');
 const paymentRouter = require('./routes/paymentRoutes');
+const referralRouter = require('./routes/referralRoutes');
 const paymentController = require('./controllers/paymentController');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -65,6 +66,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/dice', diceRouter);
 app.use('/api/v1/withdraw', withdrawRouter);
 app.use('/api/v1/payment', paymentRouter);
+app.use('/api/v1/referral', referralRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

@@ -51,15 +51,15 @@
   font-size: 2rem;
   font-weight: 600;
   color: #fff;
-  background-color: blue;
+  background-color: #495057;
   border-radius: 8px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
-  border: 3px solid #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   transition: all 500ms;
+  border: 2px solid #fff;
 }
 
 .action a:hover {
-  background-color: darkblue;
+  background-color: #212529;
   transform: scale(1.1);
 }
 

@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const Email = require('../util/email');
+const Referral = require('../models/referrerModel');
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -48,6 +49,13 @@ exports.signUp = catchAsync(async (req, res, next) => {
     referrerEmail: req.body.referrerEmail,
     country: req.body.country,
   });
+
+  if (req.body.referrerEmail !== '') {
+    await Referral.create({
+      email: req.body.referrerEmail,
+      user: newUser._id,
+    });
+  }
 
   // Send email verify token to user.
   const emailVerifyToken = newUser.createEmailVerifyToken();

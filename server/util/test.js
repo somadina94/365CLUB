@@ -10,6 +10,6 @@ exports.diceMan = () => {
     }
   }
 
-  console.log(`${results.length} wins of ${stake * 1.9} out of 100`);
-  console.log(`Company made ${stake * 100 - stake * results.length * 1.9}`);
+  console.log(`${results.length} wins of ${stake * 1.5} out of 100`);
+  console.log(`Company made ${stake * 100 - stake * results.length * 1.5}`);
 };

@@ -22,7 +22,7 @@ const AddFunds = () => {
     valueInputChangedHandler: amountInputChangedHandler,
     valueInputBlurHandler: amountInputBlurHandler,
     reset: amountInputReset,
-  } = useInput((value) => value.trim() !== '' && value.trim() > 5);
+  } = useInput((value) => value.trim() !== '' && value.trim() > 4.99);
 
   let formIsValid = false;
   if (amountInputIsValid) {

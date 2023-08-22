@@ -1,0 +1,67 @@
+.numbers {
+  max-width: 120rem;
+  margin: auto;
+}
+
+.instruction {
+  background-color: #fff;
+  padding: 2rem;
+  margin-bottom: 4rem;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.instruction p {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.digits {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.digit {
+  width: 10rem;
+  height: 10rem;
+  font-size: 6rem;
+  font-weight: 800;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.win {
+  background-color: green;
+  color: #fff;
+}
+
+.lost {
+  background-color: red;
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions button {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  background-color: purple;
+  color: #fff;
+  padding: 1rem 4rem;
+  font-size: 3rem;
+  font-weight: 600;
+  border: 3px solid #fff;
+  border-radius: 8px;
+}

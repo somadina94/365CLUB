@@ -1,45 +1,51 @@
-import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useCookies } from "react-cookie";
+import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
-import classes from "./Nav.module.css";
-import { authActions } from "../../store/auth-slice";
-import { logOut } from "../../api/api";
+import classes from './Nav.module.css';
+import { authActions } from '../../store/auth-slice';
+import { logOut } from '../../api/api';
 
 const Nav = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const setCookie = useCookies(["jwt"])[1];
+  const setCookie = useCookies(['jwt'])[1];
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
     const res = logOut();
-    setCookie("jwt", res.token);
+    setCookie('jwt', res.token);
     dispatch(authActions.logout());
   };
   return (
     <nav className={classes.nav}>
       <NavLink
-        to="/play"
-        className={(navData) => (navData.isActive ? classes.active : "")}
+        to="/play-numbers"
+        className={(navData) => (navData.isActive ? classes.active : '')}
       >
-        Play
+        Play Numbers
+      </NavLink>
+      <NavLink
+        to="/play"
+        className={(navData) => (navData.isActive ? classes.active : '')}
+      >
+        Play 365dice
       </NavLink>
       <NavLink
         to="/terms"
-        className={(navData) => (navData.isActive ? classes.active : "")}
+        className={(navData) => (navData.isActive ? classes.active : '')}
       >
         Terms of Use
       </NavLink>
       <NavLink
         to="/rules"
-        className={(navData) => (navData.isActive ? classes.active : "")}
+        className={(navData) => (navData.isActive ? classes.active : '')}
       >
         Rules
       </NavLink>
       {!isLoggedIn && (
         <NavLink
           to="/signUp"
-          className={(navData) => (navData.isActive ? classes.active : "")}
+          className={(navData) => (navData.isActive ? classes.active : '')}
         >
           Sign up
         </NavLink>
@@ -47,7 +53,7 @@ const Nav = () => {
       {!isLoggedIn && (
         <NavLink
           to="/login"
-          className={(navData) => (navData.isActive ? classes.active : "")}
+          className={(navData) => (navData.isActive ? classes.active : '')}
         >
           Login
         </NavLink>
@@ -55,7 +61,7 @@ const Nav = () => {
       {isLoggedIn && (
         <NavLink
           to="/dashboard"
-          className={(navData) => (navData.isActive ? classes.active : "")}
+          className={(navData) => (navData.isActive ? classes.active : '')}
         >
           My account
         </NavLink>
@@ -64,7 +70,7 @@ const Nav = () => {
         <NavLink
           onClick={logoutHandler}
           to="/login"
-          className={(navData) => (navData.isActive ? classes.active : "")}
+          className={(navData) => (navData.isActive ? classes.active : '')}
         >
           Logout
         </NavLink>

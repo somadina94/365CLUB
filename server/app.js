@@ -8,6 +8,7 @@ const withdrawRouter = require('./routes/withdrawRoutes');
 const paymentRouter = require('./routes/paymentRoutes');
 const referralRouter = require('./routes/referralRoutes');
 const paymentController = require('./controllers/paymentController');
+const numberRouter = require('./routes/numberRoutes');
 const helmet = require('helmet');
 const compression = require('compression');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -67,6 +68,7 @@ app.use('/api/v1/dice', diceRouter);
 app.use('/api/v1/withdraw', withdrawRouter);
 app.use('/api/v1/payment', paymentRouter);
 app.use('/api/v1/referral', referralRouter);
+app.use('/api/v1/number', numberRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

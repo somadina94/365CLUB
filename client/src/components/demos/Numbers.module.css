@@ -42,11 +42,13 @@
 .win {
   background-color: green;
   color: #fff;
+  border: 2px solid #fff;
 }
 
 .lost {
   background-color: red;
   color: #fff;
+  border: 2px solid #fff;
 }
 
 .actions {
@@ -64,4 +66,36 @@
   font-weight: 600;
   border: 3px solid #fff;
   border-radius: 8px;
+}
+
+button:disabled {
+  background-color: inherit; /* Reset background */
+  color: inherit; /* Reset text color */
+  border: inherit; /* Reset border */
+  opacity: 1; /* Reset opacity */
+  cursor: default; /* Reset cursor */
+}
+
+.actions button:disabled {
+  cursor: not-allowed;
+}
+
+.digits button:disabled {
+  cursor: not-allowed;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: transparent;
 }

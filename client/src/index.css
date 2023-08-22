@@ -48,3 +48,11 @@ code {
   bottom: 0;
   left: 0;
 }
+
+button:disabled {
+  background-color: inherit; /* Reset background */
+  color: inherit; /* Reset text color */
+  border: inherit; /* Reset border */
+  opacity: 1; /* Reset opacity */
+  cursor: default; /* Reset cursor */
+}

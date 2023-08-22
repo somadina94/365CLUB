@@ -19,28 +19,22 @@ const Nav = () => {
   return (
     <nav className={classes.nav}>
       <NavLink
-        to="/play-numbers"
+        to="/numbers"
         className={(navData) => (navData.isActive ? classes.active : '')}
       >
         Play Numbers
+      </NavLink>
+      <NavLink
+        to="/play-numbers"
+        className={(navData) => (navData.isActive ? classes.active : '')}
+      >
+        Numbers Demo
       </NavLink>
       <NavLink
         to="/play"
         className={(navData) => (navData.isActive ? classes.active : '')}
       >
         Play 365dice
-      </NavLink>
-      <NavLink
-        to="/terms"
-        className={(navData) => (navData.isActive ? classes.active : '')}
-      >
-        Terms of Use
-      </NavLink>
-      <NavLink
-        to="/rules"
-        className={(navData) => (navData.isActive ? classes.active : '')}
-      >
-        Rules
       </NavLink>
       {!isLoggedIn && (
         <NavLink

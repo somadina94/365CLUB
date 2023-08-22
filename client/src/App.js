@@ -30,7 +30,8 @@ import ContactUs from './components/body/ContactUs';
 import ProtectedRoute from './components/protection/ProtectedRoute';
 import Home from './components/body/Home';
 import ErrorModal from './components/UI/ErrorModal';
-import Numbers from './components/body/Numbers';
+import Numbers from './components/demos/Numbers';
+import PlayNumbers from './components/games/PlayNumbers';
 
 import { loader as historyLoader } from './components/history/History';
 import { loader as emailLoader } from './components/auth/EmailVerify';
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
           </ProtectedRoute>
         }
       />
+      <Route path="numbers" element={<PlayNumbers />} />
       <Route path="play-numbers" element={<Numbers />} />
       <Route path="signUp" element={<Create />} />
       <Route path="terms" element={<Terms />} />

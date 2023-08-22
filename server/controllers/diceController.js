@@ -2,6 +2,7 @@ const Dice = require('../models/diceModel');
 const User = require('../models/userModel');
 const AppError = require('../util/appError');
 const catchAsync = require('../util/catchAsync');
+const cron = require('node-cron');
 
 exports.playDice = catchAsync(async (req, res, next) => {
   // 1) Get loggedIn user
@@ -179,4 +180,15 @@ exports.getPlayerHistory = catchAsync(async (req, res, next) => {
       history,
     },
   });
+});
+
+const deleteHistory = async () => {
+  const history = await Dice.find();
+
+  history.forEach(async (el) => await Dice.findByIdAndDelete(el._id));
+};
+
+cron.schedule(`0 0 * * *`, () => {
+  deleteHistory();
+  console.log('running a task every minute');
 });

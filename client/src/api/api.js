@@ -103,6 +103,38 @@ export const playDice = async (data, jwt) => {
   }
 };
 
+export const playNumbers = async (data, jwt) => {
+  try {
+    const res = await axiosInstance({
+      method: 'POST',
+      url: `number`,
+      data,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
+
+export const playNumbersWithBonus = async (data, jwt) => {
+  try {
+    const res = await axiosInstance({
+      method: 'POST',
+      url: `number/play-with-bonus`,
+      data,
+      headers: {
+        authorization: `Bearer ${jwt}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
+
 export const getPlayerHistory = async (jwt) => {
   try {
     const res = await axiosInstance({

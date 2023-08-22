@@ -70,31 +70,39 @@ const PlayNumbers = () => {
 
     if (res.status === 'success') {
       setUpdateUser(true);
+      setIsPlaying(false);
       setResult(res.data.number.result);
+      if (e.target.textContent * 1 !== res.data.number.result) {
+        e.target.classList.add(classes.lost);
+      } else {
+        e.target.classList.add(classes.win);
+      }
       setAlertMsg(res.message);
+      setShowSpinner(false);
       if (res.data.number.status) {
         setAlertStatus(true);
       } else {
         setAlertStatus(false);
       }
       setShowAlert(true);
+      setSelectedOption(null);
+      stakeRef.current.value = '';
+      setIsPlaying(false);
       setTimeout(() => {
         setShowAlert(false);
         setUpdateUser(false);
-        setShowSpinner(false);
-        setSelectedOption(null);
-        stakeRef.current.value = '';
       }, 4000);
     } else {
       setResult(0);
       setAlertMsg(res.message);
       setAlertStatus(false);
       setShowAlert(true);
+      setShowSpinner(false);
+      setIsPlaying(false);
+      setSelectedOption(null);
+      stakeRef.current.value = '';
       setTimeout(() => {
         setShowAlert(false);
-        setShowSpinner(false);
-        setSelectedOption(null);
-        stakeRef.current.value = '';
       }, 4000);
     }
 
@@ -126,6 +134,7 @@ const PlayNumbers = () => {
     setResult(0);
     setSelectedOption(null);
     stakeRef.current.value = '';
+    setStake('');
     oneRef.current.classList.remove(classes.lost);
     twoRef.current.classList.remove(classes.lost);
     threeRef.current.classList.remove(classes.lost);
@@ -202,9 +211,12 @@ const PlayNumbers = () => {
             />
           </div>
         </div>
+        <div className={classes.instruction}>
+          <p>Pick a number</p>
+        </div>
         <div className={classes.digits}>
           {showSpinner && <Spinner />}
-          {played && <div className={classes.backdrop}></div>}
+          {(played || isPlaying) && <div className={classes.backdrop}></div>}
           <button
             className={`${oneClasses}`}
             onClick={playHandler}

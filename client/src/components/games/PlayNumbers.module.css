@@ -1,19 +1,23 @@
 .numbers {
-  max-width: 120rem;
+  max-width: 80rem;
   margin: auto;
+  border-radius: 8px;
 }
 
 .instruction {
-  max-width: 86%;
+  max-width: 60rem;
   margin: auto;
   background-color: #fff;
-  padding: 2rem;
-  margin-bottom: 4rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
 }
 
 .instruction p {
-  text-align: center;
   font-size: 2rem;
 }
 
@@ -21,7 +25,7 @@
   max-width: 60rem;
   background-color: #fff;
   margin: auto;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   padding: 2rem;
   display: flex;
   justify-content: center;
@@ -102,8 +106,9 @@
   align-items: center;
   padding: 2rem;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   position: relative;
+  border-radius: 8px;
 }
 
 .digit {
@@ -119,7 +124,6 @@
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
   transition: all 500ms;
   border: 2px solid blue;
-  background-color: #fff;
 }
 
 .win {
@@ -161,6 +165,7 @@ button:disabled {
 
 .actions button:disabled {
   cursor: not-allowed;
+  background-color: grey;
 }
 
 .digits button:disabled {

@@ -89,7 +89,7 @@ const Login = () => {
       setShowAlert(true);
       setTimeout(() => {
         navigate('/', { replace: true });
-      }, 3000);
+      }, 1500);
     } else {
       setAlertMsg(res.message);
       setAlertStatus(false);

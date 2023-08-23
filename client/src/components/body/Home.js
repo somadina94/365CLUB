@@ -7,7 +7,7 @@ import classes from './Home.module.css';
 
 const Home = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const playPath = isLoggedIn ? '/play' : '/signUp';
+  const playPath = isLoggedIn ? '/dice' : '/signUp';
   return (
     <div className={classes.home}>
       <Helmet>

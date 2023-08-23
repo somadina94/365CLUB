@@ -230,3 +230,56 @@ button:disabled {
   display: flex;
   align-items: center;
 }
+
+@media (max-width: 62.6em) {
+  .balance span {
+    font-size: 1.6rem;
+  }
+  .credit-logo {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .details h2 {
+    font-size: 1.4rem;
+  }
+
+  .details {
+    width: 14rem;
+  }
+}
+
+@media (max-width: 55em) {
+  .balance {
+    top: 8rem;
+  }
+}
+
+@media (max-width: 41.9em) {
+  .digit {
+    width: 5rem;
+    height: 5rem;
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 32.9em) {
+  .selection h2 {
+    margin-bottom: 1.4rem;
+    font-size: 1.4rem;
+  }
+
+  .select label {
+    font-size: 1rem;
+  }
+
+  .select label input {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .actions button {
+    padding: 1rem 2.4rem;
+    font-size: 1.6rem;
+  }
+}

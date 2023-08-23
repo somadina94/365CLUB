@@ -56,7 +56,7 @@ exports.playDice = catchAsync(async (req, res, next) => {
 
   // 6) Credit player if won
   if (result === 3 || result === 6 || result === 5) {
-    const newBalance = user.balance + stake * 0.9;
+    const newBalance = user.balance + stake * 0.5;
     user.balance = newBalance;
     await user.save({ validateBeforeSave: false });
   }
@@ -153,7 +153,7 @@ exports.playWithBonus = catchAsync(async (req, res, next) => {
   });
   // Update user if he won
   if (result === 3 || result === 6 || result === 5) {
-    const newBonusBalance = user.bonusBalance + stake * 1.9;
+    const newBonusBalance = user.bonusBalance + stake * 1.5;
     user.bonusBalance = newBonusBalance;
     await user.save({ validateBeforeSave: false });
   }

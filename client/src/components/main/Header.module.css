@@ -42,14 +42,14 @@
   opacity: 1;
 }
 
-@media (max-width: 43.75em) {
+@media (max-width: 56.9em) {
   .logo {
     font-size: 1.6rem;
     padding: 2.8rem 1rem;
   }
 }
 
-@media (max-width: 39.5em) {
+@media (max-width: 53.7em) {
   .menu-icon {
     display: block;
   }

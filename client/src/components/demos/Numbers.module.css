@@ -99,3 +99,18 @@ button:disabled {
   z-index: 10;
   background: transparent;
 }
+
+@media (max-width: 41.9em) {
+  .digit {
+    width: 5rem;
+    height: 5rem;
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 32.9em) {
+  .actions button {
+    padding: 1rem 2.4rem;
+    font-size: 1.6rem;
+  }
+}

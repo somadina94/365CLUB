@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSelector, useDispatch } from 'react-redux';
 import { AiOutlineDollar } from 'react-icons/ai';
+import { Helmet } from 'react-helmet-async';
 
 import classes from './PlayNumbers.module.css';
 import Spinner from '../UI/Spinner';
@@ -105,28 +106,6 @@ const PlayNumbers = () => {
         setShowAlert(false);
       }, 4000);
     }
-
-    // setTimeout(() => {
-    //   setResult(res);
-
-    //   if (e.target.textContent * 1 !== res) {
-    //     e.target.classList.add(classes.lost);
-    //     setAlertMsg('You lost....try again');
-    //     setAlertStatus(false);
-    //     setShowAlert(true);
-    //   } else {
-    //     e.target.classList.add(classes.win);
-    //     setAlertStatus(true);
-    //     setAlertMsg('Congratulations!!! You won');
-    //     setShowAlert(true);
-    //   }
-    //   setShowSpinner(false);
-    //   setIsPlaying(false);
-    // }, 3000);
-
-    // setTimeout(() => {
-    //   setShowAlert(false);
-    // }, 6000);
   };
 
   const resetHandler = () => {
@@ -158,6 +137,11 @@ const PlayNumbers = () => {
 
   return (
     <div className={classes.container}>
+      <Helmet>
+        <title>Numbers</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/numbers" />
+      </Helmet>
       <div className={classes.balance}>
         <div className={classes.details}>
           <h2>Bonus Balance</h2>

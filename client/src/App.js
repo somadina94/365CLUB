@@ -32,6 +32,7 @@ import Home from './components/body/Home';
 import ErrorModal from './components/UI/ErrorModal';
 import Numbers from './components/demos/Numbers';
 import PlayNumbers from './components/games/PlayNumbers';
+import DiceDemo from './components/demos/DiceDemo';
 
 import { loader as historyLoader } from './components/history/History';
 import { loader as emailLoader } from './components/auth/EmailVerify';
@@ -41,15 +42,23 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />} errorElement={<ErrorModal />}>
       <Route index element={<Home />} />
       <Route
-        path="play"
+        path="dice"
         element={
           <ProtectedRoute>
             <Dice />
           </ProtectedRoute>
         }
       />
-      <Route path="numbers" element={<PlayNumbers />} />
-      <Route path="play-numbers" element={<Numbers />} />
+      <Route path="dice-demo" element={<DiceDemo />} />
+      <Route
+        path="numbers"
+        element={
+          <ProtectedRoute>
+            <PlayNumbers />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="numbers-demo" element={<Numbers />} />
       <Route path="signUp" element={<Create />} />
       <Route path="terms" element={<Terms />} />
       <Route path="rules" element={<Rules />} />

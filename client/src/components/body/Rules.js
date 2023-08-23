@@ -60,9 +60,15 @@ const Rules = () => {
       <div className={classes.content}>
         <h2>6. Winning condition</h2>
         <p>
-          To win you have to roll a 3, 5 or 6, otherwise you lost. The winning
-          odd is 1.9, for example, if you stake 1credit, you get the 1 plus .90
-          credits which is 1.90credits total.
+          To win 365dice you have to roll a 3, 5 or 6, otherwise you lost. The
+          winning odd is 1.5, for example, if you stake 1credit, you get the 1
+          plus .50 credits which is 1.50credits total.
+        </p>
+        <p>
+          To win numbers prediction, you have to predict the output number
+          correctly and the green light will be on your chosen number, else when
+          you lost your chosen number will have a red light and the winning
+          number will take the green light.
         </p>
       </div>
     </section>

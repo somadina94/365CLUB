@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
+
 import classes from './Numbers.module.css';
 import Spinner from '../UI/Spinner';
 import AuthAlert from '../alerts/AuthAlert';
@@ -73,6 +75,11 @@ const Numbers = () => {
 
   return (
     <section className={classes.numbers}>
+      <Helmet>
+        <title>Numbers Demo</title>
+        <meta name="description" content="" />
+        <link rel="canonical" href="/dashboard/history" />
+      </Helmet>
       {showAlert && <AuthAlert message={alertMsg} status={alertStatus} />}
       <div className={classes.instruction}>
         <p>Predict the output number</p>

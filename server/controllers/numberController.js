@@ -12,6 +12,15 @@ exports.playNumbers = catchAsync(async (req, res, next) => {
   // Get User
   const user = await User.findById(req.user._id);
 
+  // Check if stake is higher than players maximum
+  if (stake > user.maxStake) {
+    return next(
+      new AppError(
+        `The current max stake for your account is ${user.maxStake} credits. Upgrade your account to 365CLUB and be able to stake higher`
+      )
+    );
+  }
+
   // Check if user has verified their email
   if (!user.emailVerified) {
     return next(new AppError('Please verify your email to be able to play', 401));
@@ -87,6 +96,13 @@ exports.playNumbersWithBonus = catchAsync(async (req, res, next) => {
   // Check is stake is greater than players account balalnce
   if (stake > user.bonusBalance) {
     return next(new AppError('Insufficient bonus balance', 401));
+  }
+
+  // Check is stake is lower than bonus minimium
+  if (stake < user.bonusMin) {
+    return next(
+      new AppError(`You stake is lower than allowed bonus minimium ${user.bonusMin}`, 401)
+    );
   }
 
   // Check if stake is less than Minimium allowed

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
+import { FcCurrencyExchange } from 'react-icons/fc';
 
 import classes from './Nav.module.css';
 import { authActions } from '../../store/auth-slice';
@@ -22,19 +23,27 @@ const Nav = () => {
         to="/numbers"
         className={(navData) => (navData.isActive ? classes.active : '')}
       >
+        <FcCurrencyExchange className={classes.currency} />
         Play Numbers
       </NavLink>
       <NavLink
-        to="/play-numbers"
+        to="/numbers-demo"
         className={(navData) => (navData.isActive ? classes.active : '')}
       >
         Numbers Demo
       </NavLink>
       <NavLink
-        to="/play"
+        to="/dice"
         className={(navData) => (navData.isActive ? classes.active : '')}
       >
+        <FcCurrencyExchange className={classes.currency} />
         Play 365dice
+      </NavLink>
+      <NavLink
+        to="/dice-demo"
+        className={(navData) => (navData.isActive ? classes.active : '')}
+      >
+        365dice Demo
       </NavLink>
       {!isLoggedIn && (
         <NavLink

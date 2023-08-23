@@ -6,11 +6,12 @@
 
 .nav a {
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  padding: 2.6rem 4rem;
+  padding: 2.96rem 4rem;
   color: black;
   transition: all 500ms;
+  position: relative;
 }
 
 .nav a:hover {
@@ -23,14 +24,24 @@
   color: #fff;
 }
 
-@media (max-width: 62.5em) {
+.currency {
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+
+@media (max-width: 72.8em) {
   .nav a {
     font-size: 1.4rem;
     padding: 2.96rem 2rem;
   }
 }
 
-@media (max-width: 39.4em) {
+@media (max-width: 53.7em) {
   .nav {
     flex-direction: column;
     position: absolute;
@@ -46,5 +57,24 @@
     padding: 1rem 3rem;
     width: 100%;
     text-align: center;
+  }
+
+  .currency {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto 0 auto 40%;
+  }
+}
+
+@media (max-width: 46.1em) {
+  .currency {
+    margin: auto 0 auto 35%;
+  }
+}
+
+@media (max-width: 46.1em) {
+  .currency {
+    margin: auto 0 auto 25%;
   }
 }

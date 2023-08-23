@@ -1,0 +1,71 @@
+.dice {
+  max-width: 60rem;
+  margin: auto;
+  background-color: #fff;
+  margin-top: 8rem;
+  padding: 6rem;
+  text-align: center;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.icon {
+  width: 20rem;
+  height: 20rem;
+}
+
+.won {
+  color: green;
+}
+
+.lost {
+  color: red;
+}
+
+.rotate {
+  animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.actions {
+  max-width: 60rem;
+  margin: auto;
+  margin-top: 4rem;
+  background-color: #fff;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.btn {
+  background-color: blue;
+  color: #fff;
+  padding: 2rem 4rem;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+  transition: all 500ms;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: gray;
+}

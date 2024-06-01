@@ -11,7 +11,7 @@ const Footer = () => {
       <div className={classes.copyright}>
         <p>
           <FcCopyright className={classes.icon} />
-          opyright {date} All Rights Reserved 365gainfuldice.
+          Copyright {date} All Rights Reserved 365gainfuldice.
         </p>
       </div>
     </footer>

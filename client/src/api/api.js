@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = `https://api.365gainfuldice.com/api/v1/`;
+const baseURL = `https://365api.jahbyte.com/api/v1/`;
 // const baseURL = `http://127.0.0.1:5004/api/v1/`;
 
 const axiosInstance = axios.create({
